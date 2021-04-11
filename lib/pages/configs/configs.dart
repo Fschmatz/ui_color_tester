@@ -55,7 +55,7 @@ class _ConfigsState extends State<Configs> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   side: BorderSide(
-                    color: Colors.grey.withOpacity(0.3),
+                    color: Colors.grey.withOpacity(0.5),
                     width: 1,
                   ),
                 ),
@@ -67,14 +67,12 @@ class _ConfigsState extends State<Configs> {
                     style: TextStyle(fontSize: 18),
                   ),
                   onTap: () {
-
                     Navigator.push(
                         context,
                         MaterialPageRoute<void>(
                           builder: (BuildContext context) => About(),
                           fullscreenDialog: true,
                         ));
-
                   },
                 ),
               ),
@@ -86,7 +84,7 @@ class _ConfigsState extends State<Configs> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   side: BorderSide(
-                    color: Colors.grey.withOpacity(0.3),
+                    color: Colors.grey.withOpacity(0.5),
                     width: 1,
                   ),
                 ),
@@ -120,22 +118,50 @@ class _ConfigsState extends State<Configs> {
               const SizedBox(
                 height: 15.0,
               ),
-              ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                title: Text(
-                  "Dark Theme",
-                  style: TextStyle(fontSize: 18),
+              Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  side: BorderSide(
+                    color: Colors.grey.withOpacity(0.5),
+                    width: 1,
+                  ),
                 ),
-                trailing: Consumer<ThemeNotifier>(
-                  builder: (context, notifier, child) => Switch(
-                      activeColor: Colors.blue,
-                      value: notifier.darkTheme,
-                      onChanged: (value) {
-                        notifier.toggleTheme();
-                      }),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        contentPadding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        title: Text(
+                          "Dark Theme",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        trailing: Consumer<ThemeNotifier>(
+                          builder: (context, notifier, child) => Switch(
+                              activeColor: Colors.blue,
+                              value: notifier.darkTheme,
+                              onChanged: (value) {
+                                notifier.toggleTheme();
+                              }),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                        child: Text(
+                          "All default values are set for the dark theme,"
+                          " to use white colors they must be set manually.",
+                          style: TextStyle(
+                              fontSize: 17, color: Theme.of(context).hintColor),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-
+              )
             ],
           ),
         ));

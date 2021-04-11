@@ -24,7 +24,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Color backgroundColor;
   Color appTopBarColor;
   Color bottomBarColor;
-  Color accentColor = Colors.tealAccent.withOpacity(0.8);
+  Color accentColor = Colors.tealAccent;
 
   void changeAccentColor(String colorCode) {
     setState(() {
@@ -59,6 +59,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       TextEditingController();
   TextEditingController customControllerCardBorderOpacity =
       TextEditingController();
+  TextEditingController customControllerFontSize = TextEditingController();
+
   Color cardColor;
   double cardBorderWidth = 1;
   double cardBorderRadius = 10;
@@ -91,10 +93,54 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     });
   }
 
-  changeCardBorderOpacity(double value) {
+  void changeCardBorderOpacity(double value) {
     setState(() {
       cardBorderOpacity = value;
     });
+  }
+
+  void changeFontSize(double value) {
+    setState(() {
+      cardTitleFontSize = value;
+      cardSubtitleFontSize = value - 2.5;
+    });
+  }
+
+  void populateWithDefaults(bool useSetState) {
+    //CARD
+    customControllerCardColor.text = '202020';
+    customControllerCardBorderWidth.text = cardBorderWidth.toString();
+    customControllerCardElevation.text = cardElevation.toString();
+    customControllerCardBorderRadius.text = cardBorderRadius.toString();
+    customControllerCardBorderOpacity.text = cardBorderOpacity.toString();
+    customControllerFontSize.text = cardTitleFontSize.toString();
+
+    //APP
+    customControllerAppBackgroundColor.text = '202020';
+    customControllerAppTopBarColor.text = '202020';
+    customControllerAppBottomBarColor.text = '181818';
+    customControllerAccentColor.text = '64FFDA';
+
+    if(useSetState){
+      //restore defaults
+      changeCardColor('202020');
+      changeCardBorderWidth(1.0);
+      changeCardElevation(0.0);
+      changeCardBorderRadius(10.0);
+      changeCardBorderOpacity(0.5);
+      changeFontSize(17.0);
+
+      changeAccentColor('64FFDA') ;
+      changeBackgroundColor('202020');
+      changeAppTopBarColor('202020');
+      changeAppBottomBarColor('181818');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    populateWithDefaults(false);
   }
 
   @override
@@ -105,6 +151,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         backgroundColor: appTopBarColor,
         title: Text("UI + Color Tester"),
         elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+            child: IconButton(
+              icon: Icon(Icons.restore_outlined),
+              tooltip: 'Reset to Defaults',
+              color: Theme.of(context).hintColor,
+              onPressed: () {
+                populateWithDefaults(true);
+              },
+            ),
+          ),
+        ],
       ),
       body: Column(mainAxisSize: MainAxisSize.max, children: [
         Padding(
@@ -124,38 +183,34 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 borderRadius: BorderRadius.circular(cardBorderRadius),
               ),
               onTap: () {},
-              child: SizedBox(
+              child: Container(
                 height: 100,
-                width: 800,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 0, 60, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: accentColor,
-                        radius: 22,
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(height: 30),
-                          Text("Ha! Ha! What A Story Mark!",
-                              //"Title",
-                              style: TextStyle(fontSize: cardTitleFontSize)),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "You're tearing me apart, Lisa!",
-                            // "Subtitle"
-                            style: TextStyle(
-                                fontSize: cardSubtitleFontSize,
-                                color: Theme.of(context).hintColor),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: accentColor,
+                      radius: 21,
+                    ),
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Text("Ha! Ha! What A Story Mark!",
+                            style: TextStyle(fontSize: cardTitleFontSize)),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "You're tearing me apart, Lisa!",
+                          style: TextStyle(
+                              fontSize: cardSubtitleFontSize,
+                              color: Theme.of(context).hintColor),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -192,7 +247,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       onSubmitted: (String s) => changeCardColor(s.toString()),
                       decoration: InputDecoration(
                           isDense: true,
-                          helperText: "Card Color",
+                          helperText: "Color\nDef: 202020",
                           prefixIcon: Icon(Icons.edit_outlined, size: 20),
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 0.0, horizontal: 15.0),
@@ -227,17 +282,17 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             RegExp(r'^(\d+)?\.?\d{0,2}'))
                       ],
                       keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      maxLength: 3,
+                      TextInputType.numberWithOptions(decimal: true),
+                      maxLength: 4,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                      controller: customControllerCardBorderWidth,
+                      controller: customControllerCardElevation,
                       onSubmitted: (String s) =>
-                          changeCardBorderWidth(double.parse(s)),
+                          changeCardElevation(double.parse(s)),
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                          helperText: "Card Border Width",
+                          helperText: "Elevation\nDef: 0.0",
                           contentPadding: new EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 15.0),
+                              vertical: 0.0, horizontal: 10.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.grey.withOpacity(0.3),
@@ -262,7 +317,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 ]),
               ),
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -274,17 +329,17 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             RegExp(r'^(\d+)?\.?\d{0,2}'))
                       ],
                       keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      maxLength: 3,
+                      TextInputType.numberWithOptions(decimal: true),
+                      maxLength: 4,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                      controller: customControllerCardElevation,
+                      controller: customControllerCardBorderWidth,
                       onSubmitted: (String s) =>
-                          changeCardElevation(double.parse(s)),
+                          changeCardBorderWidth(double.parse(s)),
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                          helperText: "Card Elevation",
+                          helperText: "Border Width\nDef: 1.0",
                           contentPadding: new EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 10.0),
+                              vertical: 0.0, horizontal: 15.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.grey.withOpacity(0.3),
@@ -317,14 +372,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ],
                       keyboardType:
                           TextInputType.numberWithOptions(decimal: true),
-                      maxLength: 3,
+                      maxLength: 4,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
                       controller: customControllerCardBorderRadius,
                       onSubmitted: (String s) =>
                           changeCardBorderRadius(double.parse(s)),
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                          helperText: "Card Border Radius",
+                          helperText: "Border Radius\nDef: 10.0",
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 0.0, horizontal: 10.0),
                           focusedBorder: OutlineInputBorder(
@@ -351,51 +406,100 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 ]),
               ),
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 225, 0),
-                child: TextField(
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(// only point
-                        RegExp(r'^(\d+)?\.?\d{0,2}'))
-                  ],
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  maxLength: 3,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  controller: customControllerCardBorderOpacity,
-                  onSubmitted: (String s) =>
-                      changeCardBorderOpacity(double.parse(s)),
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                      helperText: "Card Border Opacity Grey[600]   <= 1",
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 0.0, horizontal: 10.0),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.withOpacity(0.3),
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(// only point
+                              RegExp(r'^(\d+)?\.?\d{0,2}'))
+                        ],
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true),
+                        maxLength: 3,
+                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                        controller: customControllerCardBorderOpacity,
+                        onSubmitted: (String s) =>
+                            changeCardBorderOpacity(double.parse(s)),
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.edit_outlined, size: 20),
+                            helperText: "Border Opacity Def: 0.5\nGrey[600] <= 1",
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 10.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey.withOpacity(0.3),
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey.withOpacity(0.3),
+                                ),
+                                borderRadius: BorderRadius.circular(10.0)),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey.withOpacity(0.3),
+                                ),
+                                borderRadius: BorderRadius.circular(10.0))),
+                        style: TextStyle(
+                          fontSize: 17,
                         ),
-                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0)),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0))),
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(// only point
+                              RegExp(r'^(\d+)?\.?\d{0,2}'))
+                        ],
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true),
+                        maxLength: 4,
+                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                        controller: customControllerFontSize,
+                        onSubmitted: (String s) =>
+                            changeFontSize(double.parse(s)),
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.edit_outlined, size: 20),
+                            helperText: "Font Size\nDef: Title=17 Sub=14.5",
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 10.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey.withOpacity(0.3),
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey.withOpacity(0.3),
+                                ),
+                                borderRadius: BorderRadius.circular(10.0)),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey.withOpacity(0.3),
+                                ),
+                                borderRadius: BorderRadius.circular(10.0))),
+                        style: TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               Center(
                   child: const Text(
-                "Background Options",
+                "App Color Options",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               )),
               const SizedBox(height: 20),
@@ -405,12 +509,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   children: [
                     Expanded(
                       child: TextField(
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(// only point
-                              RegExp(r'^(\d+)?\d{0,2}'))
-                        ],
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
                         maxLength: 6,
                         maxLengthEnforcement: MaxLengthEnforcement.enforced,
                         controller: customControllerAppBackgroundColor,
@@ -418,7 +516,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeBackgroundColor(s.toString()),
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "Background Color",
+                            helperText: "Background Color\nDef: 202020",
                             contentPadding: new EdgeInsets.symmetric(
                                 vertical: 0.0, horizontal: 10.0),
                             focusedBorder: OutlineInputBorder(
@@ -445,12 +543,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     const SizedBox(width: 20),
                     Expanded(
                       child: TextField(
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(// only point
-                              RegExp(r'^(\d+)?\d{0,2}'))
-                        ],
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
                         maxLength: 6,
                         maxLengthEnforcement: MaxLengthEnforcement.enforced,
                         controller: customControllerAppTopBarColor,
@@ -458,7 +550,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeAppTopBarColor(s.toString()),
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "TopBar Color",
+                            helperText: "TopBar Color\nDef: 202020",
                             contentPadding: new EdgeInsets.symmetric(
                                 vertical: 0.0, horizontal: 10.0),
                             focusedBorder: OutlineInputBorder(
@@ -485,19 +577,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: Row(
                   children: [
                     Flexible(
                       child: TextField(
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(// only point
-                              RegExp(r'^(\d+)?\d{0,2}'))
-                        ],
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
                         maxLength: 6,
                         maxLengthEnforcement: MaxLengthEnforcement.enforced,
                         controller: customControllerAppBottomBarColor,
@@ -505,7 +591,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeAppBottomBarColor(s.toString()),
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "BottomBar Color",
+                            helperText: "BottomBar Color\nDef: 181818",
                             contentPadding: new EdgeInsets.symmetric(
                                 vertical: 0.0, horizontal: 10.0),
                             focusedBorder: OutlineInputBorder(
@@ -539,7 +625,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeAccentColor(s.toString()),
                         decoration: InputDecoration(
                             isDense: true,
-                            helperText: "Accent Color",
+                            helperText: "Accent Color\nDef: 64FFDA",
                             prefixIcon: Icon(Icons.edit_outlined, size: 20),
                             contentPadding: new EdgeInsets.symmetric(
                                 vertical: 0.0, horizontal: 15.0),
@@ -567,7 +653,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 100),
             ],
           ),
         ),
