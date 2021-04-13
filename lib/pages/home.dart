@@ -224,23 +224,18 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         Expanded(
           child: ListView(
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               Center(
                   child: const Text(
                 "Card Options",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               )),
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                 child: Row(children: [
                   Flexible(
                     child: TextField(
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(// only point
-                            RegExp(r'^(\d+)?\d{0,2}'))
-                      ],
-                      keyboardType: TextInputType.number,
                       maxLength: 6,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
                       controller: customControllerCardColor,
@@ -320,7 +315,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 height: 15,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                 child: Row(children: [
                   Expanded(
                     child: TextField(
@@ -409,7 +404,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 height: 15,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                 child: Row(
                   children: [
                     Expanded(
@@ -427,7 +422,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeCardBorderOpacity(double.parse(s)),
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "Border Opacity Def: 0.5\nGrey[600] <= 1",
+                            helperText: "Border Opacity\nGrey[600] <= 1\nDef: 0.5",
                             contentPadding: new EdgeInsets.symmetric(
                                 vertical: 0.0, horizontal: 10.0),
                             focusedBorder: OutlineInputBorder(
@@ -469,7 +464,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeFontSize(double.parse(s)),
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "Font Size\nDef: Title=17 Sub=14.5",
+                            helperText: "Font Size\nDef: Title = 17\nDef: SubTitle = 14.5",
                             contentPadding: new EdgeInsets.symmetric(
                                 vertical: 0.0, horizontal: 10.0),
                             focusedBorder: OutlineInputBorder(
@@ -502,7 +497,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 "App Color Options",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               )),
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: Row(
@@ -653,7 +648,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 150),
             ],
           ),
         ),

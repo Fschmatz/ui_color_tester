@@ -1,13 +1,13 @@
 class NameChangelog{
 
-  static String appVersion = "1.1.0";
+  static String appVersion = "1.1.1";
   static String appName = "UI + Color Tester Fschmtz";
 
   static String changelogCurrent = '''  
   
 Current version:  
 
-1.1.0
+1.1.1
 - UI Changes
 - Restore Defaults Button
 ''';
