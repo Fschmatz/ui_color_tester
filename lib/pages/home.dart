@@ -166,9 +166,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(mainAxisSize: MainAxisSize.max, children: [
+        child: Column(
+            mainAxisSize: MainAxisSize.max, children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),
+            padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             child: Card(
               color: cardColor,
               shape: RoundedRectangleBorder(
@@ -218,7 +219,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 20, 15, 25),
+            padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
             child: Row(
               children: [
                 const Text(
@@ -520,7 +521,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
 
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 40, 15, 25),
+            padding: const EdgeInsets.fromLTRB(15, 45, 15, 25),
             child: Row(
               children: [
                 const Text(
@@ -703,6 +704,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ],
             ),
           ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.15,)
         ]),
       ),
 
