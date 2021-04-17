@@ -15,11 +15,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   //------------- HOME
   TextEditingController customControllerAppBackgroundColor =
-      TextEditingController();
+  TextEditingController();
   TextEditingController customControllerAppTopBarColor =
-      TextEditingController();
+  TextEditingController();
   TextEditingController customControllerAppBottomBarColor =
-      TextEditingController();
+  TextEditingController();
   TextEditingController customControllerAccentColor = TextEditingController();
   Color backgroundColor;
   Color appTopBarColor;
@@ -53,12 +53,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //------------- CARD
   TextEditingController customControllerCardColor = TextEditingController();
   TextEditingController customControllerCardBorderWidth =
-      TextEditingController();
+  TextEditingController();
   TextEditingController customControllerCardElevation = TextEditingController();
   TextEditingController customControllerCardBorderRadius =
-      TextEditingController();
+  TextEditingController();
   TextEditingController customControllerCardBorderOpacity =
-      TextEditingController();
+  TextEditingController();
   TextEditingController customControllerFontSize = TextEditingController();
 
   Color cardColor;
@@ -165,494 +165,546 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
         ],
       ),
-      body: Column(mainAxisSize: MainAxisSize.max, children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(10, 20, 10, 25),
-          child: Card(
-            color: cardColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(cardBorderRadius),
-              side: BorderSide(
-                color: Colors.grey[600].withOpacity(cardBorderOpacity),
-                width: cardBorderWidth,
-              ),
-            ),
-            elevation: cardElevation,
-            child: InkWell(
-              customBorder: RoundedRectangleBorder(
+      body: SingleChildScrollView(
+        child: Column(mainAxisSize: MainAxisSize.max, children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),
+            child: Card(
+              color: cardColor,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(cardBorderRadius),
+                side: BorderSide(
+                  color: Colors.grey[600].withOpacity(cardBorderOpacity),
+                  width: cardBorderWidth,
+                ),
               ),
-              onTap: () {},
-              child: Container(
-                height: 100,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: accentColor,
-                      radius: 21,
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Text("Ha! Ha! What A Story Mark!",
-                            style: TextStyle(fontSize: cardTitleFontSize)),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "You're tearing me apart, Lisa!",
-                          style: TextStyle(
-                              fontSize: cardSubtitleFontSize,
-                              color: Theme.of(context).hintColor),
-                        ),
-                      ],
-                    ),
-                  ],
+              elevation: cardElevation,
+              child: InkWell(
+                customBorder: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(cardBorderRadius),
+                ),
+                onTap: () {},
+                child: Container(
+                  height: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: accentColor,
+                        radius: 21,
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Text("Ha! Ha! What A Story Mark!",
+                              style: TextStyle(fontSize: cardTitleFontSize)),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "You're tearing me apart, Lisa!",
+                            style: TextStyle(
+                                fontSize: cardSubtitleFontSize,
+                                color: Theme.of(context).hintColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Divider(
-          thickness: 2,
-          height: 1,
-          color: Colors.black,
-        ),
-        Expanded(
-          child: ListView(
-            children: [
-              const SizedBox(height: 25),
-              Center(
-                  child: const Text(
-                "Card Options",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              )),
-              const SizedBox(height: 25),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: Row(children: [
-                  Flexible(
-                    child: TextField(
-                      maxLength: 6,
-                      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                      controller: customControllerCardColor,
-                      onSubmitted: (String s) => changeCardColor(s.toString()),
-                      decoration: InputDecoration(
-                          isDense: true,
-                          helperText: "Color\nDef: 202020",
-                          prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                          contentPadding: new EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 15.0),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0))),
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    child: TextField(
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(// only point
-                            RegExp(r'^(\d+)?\.?\d{0,2}'))
-                      ],
-                      keyboardType:
-                      TextInputType.numberWithOptions(decimal: true),
-                      maxLength: 4,
-                      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                      controller: customControllerCardElevation,
-                      onSubmitted: (String s) =>
-                          changeCardElevation(double.parse(s)),
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                          helperText: "Elevation\nDef: 0.0",
-                          contentPadding: new EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 10.0),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0))),
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                ]),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: Row(children: [
-                  Expanded(
-                    child: TextField(
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(// only point
-                            RegExp(r'^(\d+)?\.?\d{0,2}'))
-                      ],
-                      keyboardType:
-                      TextInputType.numberWithOptions(decimal: true),
-                      maxLength: 4,
-                      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                      controller: customControllerCardBorderWidth,
-                      onSubmitted: (String s) =>
-                          changeCardBorderWidth(double.parse(s)),
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                          helperText: "Border Width\nDef: 1.0",
-                          contentPadding: new EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 15.0),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0))),
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    child: TextField(
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(// only point
-                            RegExp(r'^(\d+)?\.?\d{0,2}'))
-                      ],
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      maxLength: 4,
-                      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                      controller: customControllerCardBorderRadius,
-                      onSubmitted: (String s) =>
-                          changeCardBorderRadius(double.parse(s)),
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                          helperText: "Border Radius\nDef: 10.0",
-                          contentPadding: new EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 10.0),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0))),
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                ]),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(// only point
-                              RegExp(r'^(\d+)?\.?\d{0,2}'))
-                        ],
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
-                        maxLength: 3,
-                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                        controller: customControllerCardBorderOpacity,
-                        onSubmitted: (String s) =>
-                            changeCardBorderOpacity(double.parse(s)),
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "Border Opacity\nGrey[600] <= 1\nDef: 0.5",
-                            contentPadding: new EdgeInsets.symmetric(
-                                vertical: 0.0, horizontal: 10.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0))),
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: TextField(
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(// only point
-                              RegExp(r'^(\d+)?\.?\d{0,2}'))
-                        ],
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
-                        maxLength: 4,
-                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                        controller: customControllerFontSize,
-                        onSubmitted: (String s) =>
-                            changeFontSize(double.parse(s)),
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "Font Size\nDef: Title = 17\nDef: SubTitle = 14.5",
-                            contentPadding: new EdgeInsets.symmetric(
-                                vertical: 0.0, horizontal: 10.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0))),
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                  ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 25),
+            child: Row(
+              children: [
+                const Text(
+                  "Card Options",
+                  style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
                 ),
-              ),
-              const SizedBox(height: 25),
-              Center(
-                  child: const Text(
-                "App Color Options",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              )),
-              const SizedBox(height: 25),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        maxLength: 6,
-                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                        controller: customControllerAppBackgroundColor,
-                        onSubmitted: (String s) =>
-                            changeBackgroundColor(s.toString()),
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "Background Color\nDef: 202020",
-                            contentPadding: new EdgeInsets.symmetric(
-                                vertical: 0.0, horizontal: 10.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0))),
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: TextField(
-                        maxLength: 6,
-                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                        controller: customControllerAppTopBarColor,
-                        onSubmitted: (String s) =>
-                            changeAppTopBarColor(s.toString()),
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "TopBar Color\nDef: 202020",
-                            contentPadding: new EdgeInsets.symmetric(
-                                vertical: 0.0, horizontal: 10.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0))),
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                  ],
+                Expanded(
+                  child: Divider(
+                    indent: 15,
+                    thickness: 2,
+                    height: 1,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: TextField(
-                        maxLength: 6,
-                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                        controller: customControllerAppBottomBarColor,
-                        onSubmitted: (String s) =>
-                            changeAppBottomBarColor(s.toString()),
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            helperText: "BottomBar Color\nDef: 181818",
-                            contentPadding: new EdgeInsets.symmetric(
-                                vertical: 0.0, horizontal: 10.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0))),
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    Flexible(
-                      child: TextField(
-                        maxLength: 6,
-                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                        controller: customControllerAccentColor,
-                        onSubmitted: (String s) =>
-                            changeAccentColor(s.toString()),
-                        decoration: InputDecoration(
-                            isDense: true,
-                            helperText: "Accent Color\nDef: 64FFDA",
-                            prefixIcon: Icon(Icons.edit_outlined, size: 20),
-                            contentPadding: new EdgeInsets.symmetric(
-                                vertical: 0.0, horizontal: 15.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0))),
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 150),
-            ],
+              ],
+            ),
           ),
-        ),
-      ]),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(children: [
+              Expanded(child: Text("Color\nDef: 202020",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  maxLength: 6,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  controller: customControllerCardColor,
+                  onSubmitted: (String s) => changeCardColor(s.toString()),
+                  decoration: InputDecoration(
+                      counterText: "",
+                      contentPadding: new EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 5.0),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: accentColor,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(10.0))),
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(child: Text("Elevation\nDef: 0.0",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: TextField(
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(// only point
+                        RegExp(r'^(\d+)?\.?\d{0,2}'))
+                  ],
+                  keyboardType:
+                  TextInputType.numberWithOptions(decimal: true),
+                  maxLength: 4,
+                  textAlign: TextAlign.center,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  controller: customControllerCardElevation,
+                  onSubmitted: (String s) =>
+                      changeCardElevation(double.parse(s)),
+                  decoration: InputDecoration(
+                      counterText: "",
+                      contentPadding: new EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 5.0),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: accentColor,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(10.0))),
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+            ]),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(children: [
+              Expanded(child: Text("Border Width   \nDef: 1.0",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(// only point
+                        RegExp(r'^(\d+)?\.?\d{0,2}'))
+                  ],
+                  keyboardType:
+                  TextInputType.numberWithOptions(decimal: true),
+                  maxLength: 4,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  controller: customControllerCardBorderWidth,
+                  onSubmitted: (String s) =>
+                      changeCardBorderWidth(double.parse(s)),
+                  decoration: InputDecoration(
+                      counterText: "",
+                      contentPadding: new EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 5.0),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: accentColor,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(10.0))),
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(child: Text("Border Rad.\nDef: 10.0",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(// only point
+                        RegExp(r'^(\d+)?\.?\d{0,2}'))
+                  ],
+                  keyboardType:
+                  TextInputType.numberWithOptions(decimal: true),
+                  maxLength: 4,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  controller: customControllerCardBorderRadius,
+                  onSubmitted: (String s) =>
+                      changeCardBorderRadius(double.parse(s)),
+                  decoration: InputDecoration(
+                      counterText: "",
+                      contentPadding: new EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 5.0),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: accentColor,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(10.0))),
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+            ]),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(
+              children: [
+                Expanded(child: Text("Border Opac.\nDef: 0.5\nGrey[600] <=1",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(// only point
+                          RegExp(r'^(\d+)?\.?\d{0,2}'))
+                    ],
+                    keyboardType:
+                    TextInputType.numberWithOptions(decimal: true),
+                    maxLength: 3,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    controller: customControllerCardBorderOpacity,
+                    onSubmitted: (String s) =>
+                        changeCardBorderOpacity(double.parse(s)),
+                    decoration: InputDecoration(
+                        counterText: "",
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 5.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: accentColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0))),
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(child: Text("Font Size\nDef: Title 17\nSub 14.5",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(// only point
+                          RegExp(r'^(\d+)?\.?\d{0,2}'))
+                    ],
+                    keyboardType:
+                    TextInputType.numberWithOptions(decimal: true),
+                    maxLength: 4,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    controller: customControllerFontSize,
+                    onSubmitted: (String s) =>
+                        changeFontSize(double.parse(s)),
+                    decoration: InputDecoration(
+                        counterText: "",
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 5.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: accentColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0))),
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 40, 15, 25),
+            child: Row(
+              children: [
+                const Text(
+                  "App Color Options",
+                  style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+                ),
+                Expanded(
+                  child: Divider(
+                    indent: 15,
+                    thickness: 2,
+                    height: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(
+              children: [
+                Expanded(child: Text("Background\nDef: 202020",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    maxLength: 6,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    controller: customControllerAppBackgroundColor,
+                    onSubmitted: (String s) =>
+                        changeBackgroundColor(s.toString()),
+                    decoration: InputDecoration(
+                        counterText: "",
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 5.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: accentColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0))),
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(child: Text("TopBar\nDef: 202020",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    maxLength: 6,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    controller: customControllerAppTopBarColor,
+                    onSubmitted: (String s) =>
+                        changeAppTopBarColor(s.toString()),
+                    decoration: InputDecoration(
+                        counterText: "",
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 5.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: accentColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0))),
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(
+              children: [
+                Expanded(child: Text("BottomBar\nDef: 181818",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    maxLength: 6,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    controller: customControllerAppBottomBarColor,
+                    onSubmitted: (String s) =>
+                        changeAppBottomBarColor(s.toString()),
+                    decoration: InputDecoration(
+                        counterText: "",
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 5.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: accentColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0))),
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(child: Text("Accent \nDef: 64FFDA",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    maxLength: 6,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    controller: customControllerAccentColor,
+                    onSubmitted: (String s) =>
+                        changeAccentColor(s.toString()),
+                    decoration: InputDecoration(
+                        counterText: "",
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 5.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: accentColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            borderRadius: BorderRadius.circular(10.0))),
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ]),
+      ),
 
       //BOTTOMBAR
       bottomNavigationBar: BottomAppBar(
@@ -685,3 +737,4 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 }
 
 //keyboardType: TextInputType.numberWithOptions(decimal: true),
+

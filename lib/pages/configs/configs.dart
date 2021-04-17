@@ -112,7 +112,7 @@ class _ConfigsState extends State<Configs> {
                 padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                 child: Text(
                   "Options: ",
-                  style: TextStyle(fontSize: 19.5),
+                  style: TextStyle(fontSize: 19),
                 ),
               ),
               const SizedBox(
