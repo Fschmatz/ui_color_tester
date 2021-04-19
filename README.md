@@ -2,4 +2,4 @@
 
 Flutter application to test UI + Colors on phone.
 
-<img src="https://user-images.githubusercontent.com/21291813/115097620-ad86ac00-9f01-11eb-83b0-ee1246c425a0.png" width="30%"></img> 
+<img src="https://user-images.githubusercontent.com/21291813/115313304-65f26100-a149-11eb-9c9d-4719fc2db000.png" width="35%"></img> 
