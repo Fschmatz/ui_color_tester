@@ -33,9 +33,12 @@ class _ConfigsState extends State<Configs> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
                 elevation: 0,
                 margin: const EdgeInsets.all(2.0),
-                color: Colors.teal,
+                color: Colors.tealAccent[700],
                 child: ListTile(
                   title: Text(
                     "Flutter " +
@@ -53,13 +56,16 @@ class _ConfigsState extends State<Configs> {
               Card(
                 elevation: 0,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   side: BorderSide(
                     color: Colors.grey.withOpacity(0.5),
                     width: 1,
                   ),
                 ),
                 child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
                   leading: Icon(Icons.text_snippet_outlined),
                   trailing: Icon(Icons.keyboard_arrow_right),
                   title: Text(
@@ -82,13 +88,16 @@ class _ConfigsState extends State<Configs> {
               Card(
                 elevation: 0,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   side: BorderSide(
                     color: Colors.grey.withOpacity(0.5),
                     width: 1,
                   ),
                 ),
                 child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
                   leading: Icon(Icons.text_snippet_outlined),
                   trailing: Icon(Icons.keyboard_arrow_right),
                   title: Text(
@@ -121,7 +130,7 @@ class _ConfigsState extends State<Configs> {
               Card(
                 elevation: 0,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   side: BorderSide(
                     color: Colors.grey.withOpacity(0.5),
                     width: 1,

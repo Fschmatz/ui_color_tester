@@ -24,7 +24,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Color backgroundColor;
   Color appTopBarColor;
   Color bottomBarColor;
-  Color accentColor = Colors.tealAccent;
+  Color accentColor = Colors.tealAccent[700];
 
   void changeAccentColor(String colorCode) {
     setState(() {
@@ -64,7 +64,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Color cardColor;
   double cardBorderWidth = 1;
   double cardBorderRadius = 10;
-  double cardElevation = 0;
+  double cardElevation = 1.0;
   double cardTitleFontSize = 17;
   double cardSubtitleFontSize = 14.5;
   double cardBorderOpacity = 0.5;
@@ -108,7 +108,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   void populateWithDefaults(bool useSetState) {
     //CARD
-    customControllerCardColor.text = '202020';
+    customControllerCardColor.text = '252525';
     customControllerCardBorderWidth.text = cardBorderWidth.toString();
     customControllerCardElevation.text = cardElevation.toString();
     customControllerCardBorderRadius.text = cardBorderRadius.toString();
@@ -119,18 +119,18 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     customControllerAppBackgroundColor.text = '202020';
     customControllerAppTopBarColor.text = '202020';
     customControllerAppBottomBarColor.text = '181818';
-    customControllerAccentColor.text = '64FFDA';
+    customControllerAccentColor.text = '00BFA5';
 
     if(useSetState){
       //restore defaults
-      changeCardColor('202020');
+      changeCardColor('252525');
       changeCardBorderWidth(1.0);
-      changeCardElevation(0.0);
+      changeCardElevation(1.0);
       changeCardBorderRadius(10.0);
       changeCardBorderOpacity(0.5);
       changeFontSize(17.0);
 
-      changeAccentColor('64FFDA') ;
+      changeAccentColor('00BFA5') ;
       changeBackgroundColor('202020');
       changeAppTopBarColor('202020');
       changeAppBottomBarColor('181818');
@@ -169,7 +169,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         child: Column(
             mainAxisSize: MainAxisSize.max, children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
             child: Card(
               color: cardColor,
               shape: RoundedRectangleBorder(
@@ -186,26 +186,26 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 ),
                 onTap: () {},
                 child: Container(
-                  height: 100,
+                  height: 110,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CircleAvatar(
                         backgroundColor: accentColor,
-                        radius: 21,
+                        radius: 22,
                       ),
                       Column(
                         children: [
                           SizedBox(
-                            height: 25,
+                            height: 32,
                           ),
-                          Text("Ha! Ha! What A Story Mark!",
+                          Text("Ha! Ha! Ha! What A Story Mark!",
                               style: TextStyle(fontSize: cardTitleFontSize)),
                           SizedBox(
                             height: 10,
                           ),
                           Text(
-                            "You're tearing me apart, Lisa!",
+                            "You're Tearing Me Apart, Lisa!",
                             style: TextStyle(
                                 fontSize: cardSubtitleFontSize,
                                 color: Theme.of(context).hintColor),
@@ -219,7 +219,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
+            padding: const EdgeInsets.fromLTRB(15, 25, 15, 30),
             child: Row(
               children: [
                 const Text(
@@ -239,7 +239,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(children: [
-              Expanded(child: Text("Color\nDef: 202020",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              Expanded(child: Text("Color\nDef: 252525",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
               const SizedBox(
                 width: 20,
               ),
@@ -278,7 +278,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               const SizedBox(
                 width: 20,
               ),
-              Expanded(child: Text("Elevation\nDef: 0.0",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              Expanded(child: Text("Elevation\nDef: 1.0",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
               const SizedBox(
                 width: 20,
               ),
@@ -521,7 +521,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
 
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 45, 15, 25),
+            padding: const EdgeInsets.fromLTRB(15, 45, 15, 30),
             child: Row(
               children: [
                 const Text(
@@ -664,7 +664,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ),
                 ),
                 const SizedBox(width: 20),
-                Expanded(child: Text("Accent \nDef: 64FFDA",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                Expanded(child: Text("Accent \nDef: 00BFA5",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
                 const SizedBox(
                   width: 20,
                 ),
@@ -704,7 +704,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ],
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.15,)
+          SizedBox(height: MediaQuery.of(context).size.height * 0.22,)
         ]),
       ),
 
