@@ -68,10 +68,23 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   double cardTitleFontSize = 17;
   double cardSubtitleFontSize = 14.5;
   double cardBorderOpacity = 0.5;
+  int cardBorderColor = 700;
+
+  bool isSelectedGrey600 = false;
+  bool isSelectedGrey700 = false;
+  bool isSelectedGrey800 = false;
+  bool isSelectedGrey900 = false;
+
 
   void changeCardColor(String colorCode) {
     setState(() {
       cardColor = Color(int.parse('0xFF' + colorCode));
+    });
+  }
+
+  void changeBorderColor(int colorCode) {
+    setState(() {
+      cardBorderColor = colorCode;
     });
   }
 
@@ -120,6 +133,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     customControllerAppTopBarColor.text = '202020';
     customControllerAppBottomBarColor.text = '181818';
     customControllerAccentColor.text = '00BFA5';
+    isSelectedGrey600 = false;
+    isSelectedGrey700 = true;
+    isSelectedGrey800 = false;
+    isSelectedGrey900 = false;
 
     if(useSetState){
       //restore defaults
@@ -129,6 +146,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       changeCardBorderRadius(10.0);
       changeCardBorderOpacity(0.5);
       changeFontSize(17.0);
+      changeBorderColor(700);
 
       changeAccentColor('00BFA5') ;
       changeBackgroundColor('202020');
@@ -175,7 +193,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(cardBorderRadius),
                 side: BorderSide(
-                  color: Colors.grey[600].withOpacity(cardBorderOpacity),
+                  color: Colors.grey[cardBorderColor].withOpacity(cardBorderOpacity),
                   width: cardBorderWidth,
                 ),
               ),
@@ -219,7 +237,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 25, 15, 30),
+            padding: const EdgeInsets.fromLTRB(15, 25, 15, 20),
             child: Row(
               children: [
                 const Text(
@@ -239,7 +257,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(children: [
-              Expanded(child: Text("Color\nDef: 252525",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              Expanded(child: Text("Background\nDef: 252525",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
               const SizedBox(
                 width: 20,
               ),
@@ -262,12 +280,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey[700].withOpacity(0.5),
                           ),
                           borderRadius: BorderRadius.circular(10.0)),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey[700].withOpacity(0.5),
                           ),
                           borderRadius: BorderRadius.circular(10.0))),
                   style: TextStyle(
@@ -308,12 +326,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey[700].withOpacity(0.5),
                           ),
                           borderRadius: BorderRadius.circular(10.0)),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey[700].withOpacity(0.5),
                           ),
                           borderRadius: BorderRadius.circular(10.0))),
                   style: TextStyle(
@@ -359,12 +377,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey[700].withOpacity(0.5),
                           ),
                           borderRadius: BorderRadius.circular(10.0)),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey[700].withOpacity(0.5),
                           ),
                           borderRadius: BorderRadius.circular(10.0))),
                   style: TextStyle(
@@ -405,12 +423,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey[700].withOpacity(0.5),
                           ),
                           borderRadius: BorderRadius.circular(10.0)),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey[700].withOpacity(0.5),
                           ),
                           borderRadius: BorderRadius.circular(10.0))),
                   style: TextStyle(
@@ -427,7 +445,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(
               children: [
-                Expanded(child: Text("Border Opac.\nDef: 0.5\nGrey[600] <=1",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                Expanded(child: Text("Border Opac.\nDef: 0.5\n<= 1",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
                 const SizedBox(
                   width: 20,
                 ),
@@ -457,12 +475,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0))),
                     style: TextStyle(
@@ -503,12 +521,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0))),
                     style: TextStyle(
@@ -520,8 +538,126 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
           ),
 
+          const SizedBox(
+            height: 15,
+          ),
+          //Border COLOR BUTTONS
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 45, 15, 30),
+            padding: const EdgeInsets.fromLTRB(15, 0, 8, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    child:Row(
+                      children: [
+                        Text("Border Color\nDef: Grey[700]",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)
+                      ],
+                    )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+
+                    Column(
+                      children: [
+                        MaterialButton(
+                          minWidth: 20,
+                          height: 35,
+                          child: isSelectedGrey600 ? Icon(Icons.check,color: Colors.white70,) : SizedBox.shrink(),
+                          shape: CircleBorder(side: BorderSide(width: 2, color: Colors.white.withOpacity(0.3), style: BorderStyle.solid)),
+                          elevation: 2,
+                          color: Colors.grey[600],
+                          onPressed: () {
+                            setState(()  {
+                              isSelectedGrey600 = true;
+                              isSelectedGrey700 = false;
+                              isSelectedGrey800 = false;
+                              isSelectedGrey900 = false;
+                            });
+                            changeBorderColor(600);
+                          },
+                        ),
+                        Text("600",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),),
+                      ],
+                    ),
+                    const SizedBox(width: 15,),
+
+                    Column(
+                      children: [
+                        MaterialButton(
+                          minWidth: 20,
+                          height: 35,
+                          child: isSelectedGrey700 ? Icon(Icons.check,color: Colors.white70,) : SizedBox.shrink(),
+                          shape: CircleBorder(side: BorderSide(width: 2, color: Colors.white.withOpacity(0.3), style: BorderStyle.solid)),
+                          elevation: 2,
+                          color: Colors.grey[700],
+                          onPressed: () {
+                            setState(() {
+                              isSelectedGrey600 = false;
+                              isSelectedGrey700 = true;
+                              isSelectedGrey800 = false;
+                              isSelectedGrey900 = false;
+                            });
+                            changeBorderColor(700);
+                          },
+                        ),
+                        Text("700",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),),
+                      ],
+                    ),
+                    const SizedBox(width: 15,),
+                    Column(
+                      children: [
+                        MaterialButton(
+                          minWidth: 20,
+                          height: 35,
+                          child: isSelectedGrey800 ? Icon(Icons.check,color: Colors.white70,) : SizedBox.shrink(),
+                          shape: CircleBorder(side: BorderSide(width: 2, color: Colors.white.withOpacity(0.3), style: BorderStyle.solid)),
+                          elevation: 2,
+                          color: Colors.grey[800],
+                          onPressed: () {
+                            setState(() {
+                              isSelectedGrey600 = false;
+                              isSelectedGrey700 = false;
+                              isSelectedGrey800 = true;
+                              isSelectedGrey900 = false;
+                            });
+                            changeBorderColor(800);
+                          },
+                        ),
+                        Text("800",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),),
+                      ],
+                    ),
+                    const SizedBox(width: 15,),
+                    Column(
+                      children: [
+                        MaterialButton(
+                          minWidth: 20,
+                          height: 35,
+                          child: isSelectedGrey900 ? Icon(Icons.check,color: Colors.white70,) : SizedBox.shrink(),
+                          shape: CircleBorder(side: BorderSide(width: 2, color: Colors.white.withOpacity(0.3), style: BorderStyle.solid)),
+                          elevation: 2,
+                          color: Colors.grey[900],
+                          onPressed: () {
+                            setState(() {
+                              isSelectedGrey600 = false;
+                              isSelectedGrey700 = false;
+                              isSelectedGrey800 = false;
+                              isSelectedGrey900 = true;
+                            });
+                            changeBorderColor(900);
+                          },
+                        ),
+                        Text("900",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
             child: Row(
               children: [
                 const Text(
@@ -567,12 +703,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0))),
                     style: TextStyle(
@@ -605,12 +741,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0))),
                     style: TextStyle(
@@ -650,12 +786,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0))),
                     style: TextStyle(
@@ -688,12 +824,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Colors.grey[700].withOpacity(0.5),
                             ),
                             borderRadius: BorderRadius.circular(10.0))),
                     style: TextStyle(
@@ -704,7 +840,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ],
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.22,)
+          SizedBox(height: MediaQuery.of(context).size.height * 0.25,)
         ]),
       ),
 
@@ -739,4 +875,5 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 }
 
 //keyboardType: TextInputType.numberWithOptions(decimal: true),
+
 

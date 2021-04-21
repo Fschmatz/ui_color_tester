@@ -7,7 +7,6 @@ class Changelog extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("Changelog"),
-          centerTitle: true,
           elevation: 0,
         ),
         body: ListView(children: <Widget>[
@@ -16,7 +15,7 @@ class Changelog extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
               side: BorderSide(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey[700].withOpacity(0.3),
                 width: 1,
               ),
             ),
