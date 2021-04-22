@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'configs/configs.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,11 +16,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   //------------- HOME
   TextEditingController customControllerAppBackgroundColor =
-  TextEditingController();
+      TextEditingController();
   TextEditingController customControllerAppTopBarColor =
-  TextEditingController();
+      TextEditingController();
   TextEditingController customControllerAppBottomBarColor =
-  TextEditingController();
+      TextEditingController();
   TextEditingController customControllerAccentColor = TextEditingController();
   Color backgroundColor;
   Color appTopBarColor;
@@ -27,38 +28,62 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Color accentColor = Colors.tealAccent[700];
 
   void changeAccentColor(String colorCode) {
-    setState(() {
-      accentColor = Color(int.parse('0xFF' + colorCode));
-    });
+    try {
+      setState(() {
+        accentColor = Color(int.parse('0xFF' + colorCode));
+      });
+    } catch (exception) {
+      Fluttertoast.showToast(
+        msg: "Invalid Value",
+      );
+    }
   }
 
   void changeBackgroundColor(String colorCode) {
-    setState(() {
-      backgroundColor = Color(int.parse('0xFF' + colorCode));
-    });
+    try {
+      setState(() {
+        backgroundColor = Color(int.parse('0xFF' + colorCode));
+      });
+    } catch (exception) {
+      Fluttertoast.showToast(
+        msg: "Invalid Value",
+      );
+    }
   }
 
   void changeAppTopBarColor(String colorCode) {
-    setState(() {
-      appTopBarColor = Color(int.parse('0xFF' + colorCode));
-    });
+    try {
+      setState(() {
+        appTopBarColor = Color(int.parse('0xFF' + colorCode));
+      });
+    } catch (exception) {
+      Fluttertoast.showToast(
+        msg: "Invalid Value",
+      );
+    }
   }
 
   void changeAppBottomBarColor(String colorCode) {
-    setState(() {
-      bottomBarColor = Color(int.parse('0xFF' + colorCode));
-    });
+    try {
+      setState(() {
+        bottomBarColor = Color(int.parse('0xFF' + colorCode));
+      });
+    } catch (exception) {
+      Fluttertoast.showToast(
+          msg: "Invalid Value",
+      );
+    }
   }
 
   //------------- CARD
   TextEditingController customControllerCardColor = TextEditingController();
   TextEditingController customControllerCardBorderWidth =
-  TextEditingController();
+      TextEditingController();
   TextEditingController customControllerCardElevation = TextEditingController();
   TextEditingController customControllerCardBorderRadius =
-  TextEditingController();
+      TextEditingController();
   TextEditingController customControllerCardBorderOpacity =
-  TextEditingController();
+      TextEditingController();
   TextEditingController customControllerFontSize = TextEditingController();
 
   Color cardColor;
@@ -75,11 +100,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   bool isSelectedGrey800 = false;
   bool isSelectedGrey900 = false;
 
-
   void changeCardColor(String colorCode) {
-    setState(() {
-      cardColor = Color(int.parse('0xFF' + colorCode));
-    });
+    try {
+      setState(() {
+        cardColor = Color(int.parse('0xFF' + colorCode));
+      });
+    } catch (exception) {
+      Fluttertoast.showToast(
+        msg: "Invalid Value",
+      );
+    }
   }
 
   void changeBorderColor(int colorCode) {
@@ -107,9 +137,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   void changeCardBorderOpacity(double value) {
-    setState(() {
-      cardBorderOpacity = value;
-    });
+      if(value <= 1){
+        setState(() {
+          cardBorderOpacity = value;
+        });
+      } else {
+        Fluttertoast.showToast(
+          msg: "Invalid Value\nMust Be <= 1",
+        );
+      }
   }
 
   void changeFontSize(double value) {
@@ -121,7 +157,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   void populateWithDefaults(bool useSetState) {
     //CARD
-    customControllerCardColor.text = '252525';
+    customControllerCardColor.text = '282828';
     customControllerCardBorderWidth.text = cardBorderWidth.toString();
     customControllerCardElevation.text = cardElevation.toString();
     customControllerCardBorderRadius.text = cardBorderRadius.toString();
@@ -138,9 +174,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     isSelectedGrey800 = false;
     isSelectedGrey900 = false;
 
-    if(useSetState){
+    if (useSetState) {
       //restore defaults
-      changeCardColor('252525');
+      changeCardColor('282828');
       changeCardBorderWidth(1.0);
       changeCardElevation(1.0);
       changeCardBorderRadius(10.0);
@@ -148,7 +184,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       changeFontSize(17.0);
       changeBorderColor(700);
 
-      changeAccentColor('00BFA5') ;
+      changeAccentColor('00BFA5');
       changeBackgroundColor('202020');
       changeAppTopBarColor('202020');
       changeAppBottomBarColor('181818');
@@ -184,8 +220,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-            mainAxisSize: MainAxisSize.max, children: [
+        child: Column(mainAxisSize: MainAxisSize.max, children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
             child: Card(
@@ -193,7 +228,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(cardBorderRadius),
                 side: BorderSide(
-                  color: Colors.grey[cardBorderColor].withOpacity(cardBorderOpacity),
+                  color: Colors.grey[cardBorderColor]
+                      .withOpacity(cardBorderOpacity),
                   width: cardBorderWidth,
                 ),
               ),
@@ -257,87 +293,34 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(children: [
-              Expanded(child: Text("Background\nDef: 252525",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              Expanded(
+                  child: Text(
+                "Background\nDef: 252525",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
               const SizedBox(
                 width: 20,
               ),
               Flexible(
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  maxLength: 6,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  controller: customControllerCardColor,
-                  onSubmitted: (String s) => changeCardColor(s.toString()),
-                  decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 0.0, horizontal: 5.0),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: accentColor,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey[700].withOpacity(0.5),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0)),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey[700].withOpacity(0.5),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0))),
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
+                child: txtFieldFuncString(
+                    customControllerCardColor, changeCardColor),
               ),
               const SizedBox(
                 width: 20,
               ),
-              Expanded(child: Text("Elevation\nDef: 1.0",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              Expanded(
+                  child: Text(
+                "Elevation\nDef: 1.0",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
               const SizedBox(
                 width: 20,
               ),
               Flexible(
-                child: TextField(
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(// only point
-                        RegExp(r'^(\d+)?\.?\d{0,2}'))
-                  ],
-                  keyboardType:
-                  TextInputType.numberWithOptions(decimal: true),
-                  maxLength: 4,
-                  textAlign: TextAlign.center,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  controller: customControllerCardElevation,
-                  onSubmitted: (String s) =>
-                      changeCardElevation(double.parse(s)),
-                  decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 0.0, horizontal: 5.0),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: accentColor,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey[700].withOpacity(0.5),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0)),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey[700].withOpacity(0.5),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0))),
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
+                child: txtFieldFuncDouble(
+                    customControllerCardElevation, changeCardElevation),
               ),
             ]),
           ),
@@ -347,94 +330,34 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(children: [
-              Expanded(child: Text("Border Width   \nDef: 1.0",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              Expanded(
+                  child: Text(
+                "Border Width   \nDef: 1.0",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
               const SizedBox(
                 width: 20,
               ),
               Flexible(
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(// only point
-                        RegExp(r'^(\d+)?\.?\d{0,2}'))
-                  ],
-                  keyboardType:
-                  TextInputType.numberWithOptions(decimal: true),
-                  maxLength: 4,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  controller: customControllerCardBorderWidth,
-                  onSubmitted: (String s) =>
-                      changeCardBorderWidth(double.parse(s)),
-                  decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 0.0, horizontal: 5.0),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: accentColor,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey[700].withOpacity(0.5),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0)),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey[700].withOpacity(0.5),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0))),
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
+                child: txtFieldFuncDouble(
+                    customControllerCardBorderWidth, changeCardBorderWidth),
               ),
               const SizedBox(
                 width: 20,
               ),
-              Expanded(child: Text("Border Rad.\nDef: 10.0",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+              Expanded(
+                  child: Text(
+                "Border Rad.\nDef: 10.0",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
               const SizedBox(
                 width: 20,
               ),
               Flexible(
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(// only point
-                        RegExp(r'^(\d+)?\.?\d{0,2}'))
-                  ],
-                  keyboardType:
-                  TextInputType.numberWithOptions(decimal: true),
-                  maxLength: 4,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  controller: customControllerCardBorderRadius,
-                  onSubmitted: (String s) =>
-                      changeCardBorderRadius(double.parse(s)),
-                  decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 0.0, horizontal: 5.0),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: accentColor,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey[700].withOpacity(0.5),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0)),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey[700].withOpacity(0.5),
-                          ),
-                          borderRadius: BorderRadius.circular(10.0))),
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
+                child: txtFieldFuncDouble(
+                    customControllerCardBorderRadius, changeCardBorderRadius),
               ),
             ]),
           ),
@@ -445,94 +368,34 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(
               children: [
-                Expanded(child: Text("Border Opac.\nDef: 0.5\n<= 1",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                Expanded(
+                    child: Text(
+                  "Border Opac.\nDef: 0.5\n<= 1",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
                 const SizedBox(
                   width: 20,
                 ),
                 Flexible(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(// only point
-                          RegExp(r'^(\d+)?\.?\d{0,2}'))
-                    ],
-                    keyboardType:
-                    TextInputType.numberWithOptions(decimal: true),
-                    maxLength: 3,
-                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    controller: customControllerCardBorderOpacity,
-                    onSubmitted: (String s) =>
-                        changeCardBorderOpacity(double.parse(s)),
-                    decoration: InputDecoration(
-                        counterText: "",
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 5.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: accentColor,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0))),
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
+                  child: txtFieldFuncDouble(customControllerCardBorderOpacity,
+                      changeCardBorderOpacity),
                 ),
                 const SizedBox(
                   width: 20,
                 ),
-                Expanded(child: Text("Font Size\nDef: Title 17\nSub 14.5",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                Expanded(
+                    child: Text(
+                  "Font Size\nDef: Title 17\nSub 14.5",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
                 const SizedBox(
                   width: 20,
                 ),
                 Flexible(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(// only point
-                          RegExp(r'^(\d+)?\.?\d{0,2}'))
-                    ],
-                    keyboardType:
-                    TextInputType.numberWithOptions(decimal: true),
-                    maxLength: 4,
-                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    controller: customControllerFontSize,
-                    onSubmitted: (String s) =>
-                        changeFontSize(double.parse(s)),
-                    decoration: InputDecoration(
-                        counterText: "",
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 5.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: accentColor,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0))),
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
+                  child: txtFieldFuncDouble(
+                      customControllerFontSize, changeFontSize),
                 ),
               ],
             ),
@@ -548,27 +411,38 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    child:Row(
-                      children: [
-                        Text("Border Color\nDef: Grey[700]",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)
-                      ],
+                    child: Row(
+                  children: [
+                    Text(
+                      "Border Color\nDef: Grey[700]",
+                      style: TextStyle(
+                          fontSize: 12.5, color: Theme.of(context).hintColor),
                     )
-                ),
+                  ],
+                )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-
                     Column(
                       children: [
                         MaterialButton(
                           minWidth: 20,
                           height: 35,
-                          child: isSelectedGrey600 ? Icon(Icons.check,color: Colors.white70,) : SizedBox.shrink(),
-                          shape: CircleBorder(side: BorderSide(width: 2, color: Colors.white.withOpacity(0.3), style: BorderStyle.solid)),
+                          child: isSelectedGrey600
+                              ? Icon(
+                                  Icons.check,
+                                  color: Colors.white70,
+                                )
+                              : SizedBox.shrink(),
+                          shape: CircleBorder(
+                              side: BorderSide(
+                                  width: 2,
+                                  color: Colors.white.withOpacity(0.3),
+                                  style: BorderStyle.solid)),
                           elevation: 2,
                           color: Colors.grey[600],
                           onPressed: () {
-                            setState(()  {
+                            setState(() {
                               isSelectedGrey600 = true;
                               isSelectedGrey700 = false;
                               isSelectedGrey800 = false;
@@ -577,18 +451,33 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeBorderColor(600);
                           },
                         ),
-                        Text("600",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),),
+                        Text(
+                          "600",
+                          style: TextStyle(
+                              fontSize: 12.5,
+                              color: Theme.of(context).hintColor),
+                        ),
                       ],
                     ),
-                    const SizedBox(width: 15,),
-
+                    const SizedBox(
+                      width: 15,
+                    ),
                     Column(
                       children: [
                         MaterialButton(
                           minWidth: 20,
                           height: 35,
-                          child: isSelectedGrey700 ? Icon(Icons.check,color: Colors.white70,) : SizedBox.shrink(),
-                          shape: CircleBorder(side: BorderSide(width: 2, color: Colors.white.withOpacity(0.3), style: BorderStyle.solid)),
+                          child: isSelectedGrey700
+                              ? Icon(
+                                  Icons.check,
+                                  color: Colors.white70,
+                                )
+                              : SizedBox.shrink(),
+                          shape: CircleBorder(
+                              side: BorderSide(
+                                  width: 2,
+                                  color: Colors.white.withOpacity(0.3),
+                                  style: BorderStyle.solid)),
                           elevation: 2,
                           color: Colors.grey[700],
                           onPressed: () {
@@ -601,17 +490,33 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeBorderColor(700);
                           },
                         ),
-                        Text("700",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),),
+                        Text(
+                          "700",
+                          style: TextStyle(
+                              fontSize: 12.5,
+                              color: Theme.of(context).hintColor),
+                        ),
                       ],
                     ),
-                    const SizedBox(width: 15,),
+                    const SizedBox(
+                      width: 15,
+                    ),
                     Column(
                       children: [
                         MaterialButton(
                           minWidth: 20,
                           height: 35,
-                          child: isSelectedGrey800 ? Icon(Icons.check,color: Colors.white70,) : SizedBox.shrink(),
-                          shape: CircleBorder(side: BorderSide(width: 2, color: Colors.white.withOpacity(0.3), style: BorderStyle.solid)),
+                          child: isSelectedGrey800
+                              ? Icon(
+                                  Icons.check,
+                                  color: Colors.white70,
+                                )
+                              : SizedBox.shrink(),
+                          shape: CircleBorder(
+                              side: BorderSide(
+                                  width: 2,
+                                  color: Colors.white.withOpacity(0.3),
+                                  style: BorderStyle.solid)),
                           elevation: 2,
                           color: Colors.grey[800],
                           onPressed: () {
@@ -624,17 +529,33 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeBorderColor(800);
                           },
                         ),
-                        Text("800",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),),
+                        Text(
+                          "800",
+                          style: TextStyle(
+                              fontSize: 12.5,
+                              color: Theme.of(context).hintColor),
+                        ),
                       ],
                     ),
-                    const SizedBox(width: 15,),
+                    const SizedBox(
+                      width: 15,
+                    ),
                     Column(
                       children: [
                         MaterialButton(
                           minWidth: 20,
                           height: 35,
-                          child: isSelectedGrey900 ? Icon(Icons.check,color: Colors.white70,) : SizedBox.shrink(),
-                          shape: CircleBorder(side: BorderSide(width: 2, color: Colors.white.withOpacity(0.3), style: BorderStyle.solid)),
+                          child: isSelectedGrey900
+                              ? Icon(
+                                  Icons.check,
+                                  color: Colors.white70,
+                                )
+                              : SizedBox.shrink(),
+                          shape: CircleBorder(
+                              side: BorderSide(
+                                  width: 2,
+                                  color: Colors.white.withOpacity(0.3),
+                                  style: BorderStyle.solid)),
                           elevation: 2,
                           color: Colors.grey[900],
                           onPressed: () {
@@ -647,7 +568,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             changeBorderColor(900);
                           },
                         ),
-                        Text("900",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),),
+                        Text(
+                          "900",
+                          style: TextStyle(
+                              fontSize: 12.5,
+                              color: Theme.of(context).hintColor),
+                        ),
                       ],
                     ),
                   ],
@@ -679,80 +605,32 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(
               children: [
-                Expanded(child: Text("Background\nDef: 202020",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                Expanded(
+                    child: Text(
+                  "Background\nDef: 202020",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
                 const SizedBox(
                   width: 20,
                 ),
                 Flexible(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    maxLength: 6,
-                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    controller: customControllerAppBackgroundColor,
-                    onSubmitted: (String s) =>
-                        changeBackgroundColor(s.toString()),
-                    decoration: InputDecoration(
-                        counterText: "",
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 5.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: accentColor,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0))),
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
+                  child: txtFieldFuncString(customControllerAppBackgroundColor,
+                      changeBackgroundColor),
                 ),
                 const SizedBox(width: 20),
-                Expanded(child: Text("TopBar\nDef: 202020",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                Expanded(
+                    child: Text(
+                  "TopBar\nDef: 202020",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
                 const SizedBox(
                   width: 20,
                 ),
                 Flexible(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    maxLength: 6,
-                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    controller: customControllerAppTopBarColor,
-                    onSubmitted: (String s) =>
-                        changeAppTopBarColor(s.toString()),
-                    decoration: InputDecoration(
-                        counterText: "",
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 5.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: accentColor,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0))),
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
+                  child: txtFieldFuncString(
+                      customControllerAppTopBarColor, changeAppTopBarColor),
                 ),
               ],
             ),
@@ -762,85 +640,39 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(
               children: [
-                Expanded(child: Text("BottomBar\nDef: 181818",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                Expanded(
+                    child: Text(
+                  "BottomBar\nDef: 181818",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
                 const SizedBox(
                   width: 20,
                 ),
                 Flexible(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    maxLength: 6,
-                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    controller: customControllerAppBottomBarColor,
-                    onSubmitted: (String s) =>
-                        changeAppBottomBarColor(s.toString()),
-                    decoration: InputDecoration(
-                        counterText: "",
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 5.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: accentColor,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0))),
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
+                  child: txtFieldFuncString(customControllerAppBottomBarColor,
+                      changeAppBottomBarColor),
                 ),
                 const SizedBox(width: 20),
-                Expanded(child: Text("Accent \nDef: 00BFA5",style: TextStyle(fontSize: 12.5,color:Theme.of(context).hintColor ),)),
+                Expanded(
+                    child: Text(
+                  "Accent \nDef: 00BFA5",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
                 const SizedBox(
                   width: 20,
                 ),
                 Flexible(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    maxLength: 6,
-                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    controller: customControllerAccentColor,
-                    onSubmitted: (String s) =>
-                        changeAccentColor(s.toString()),
-                    decoration: InputDecoration(
-                        counterText: "",
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 5.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: accentColor,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey[700].withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.circular(10.0))),
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
+                  child: txtFieldFuncString(
+                      customControllerAccentColor, changeAccentColor),
                 ),
               ],
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.25,)
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.1,
+          )
         ]),
       ),
 
@@ -872,8 +704,77 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           )),
     );
   }
+
+  Widget txtFieldFuncString(
+      TextEditingController controller, Function onSubmitFunc) {
+    return TextField(
+      textAlign: TextAlign.center,
+      maxLength: 6,
+      maxLengthEnforcement: MaxLengthEnforcement.enforced,
+      controller: controller,
+      onSubmitted: (String s) => onSubmitFunc(s.toString()),
+      decoration: InputDecoration(
+          counterText: "",
+          contentPadding:
+              new EdgeInsets.symmetric(vertical: 0.0, horizontal: 5.0),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: accentColor,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey[700].withOpacity(0.5),
+              ),
+              borderRadius: BorderRadius.circular(10.0)),
+          border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey[700].withOpacity(0.5),
+              ),
+              borderRadius: BorderRadius.circular(10.0))),
+      style: TextStyle(
+        fontSize: 17,
+      ),
+    );
+  }
+
+  Widget txtFieldFuncDouble(
+      TextEditingController controller, Function onSubmitFunc) {
+    return TextField(
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(// only point
+            RegExp(r'^(\d+)?\.?\d{0,2}'))
+      ],
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      maxLength: 4,
+      textAlign: TextAlign.center,
+      maxLengthEnforcement: MaxLengthEnforcement.enforced,
+      controller: controller,
+      onSubmitted: (String s) => onSubmitFunc(double.parse(s)),
+      decoration: InputDecoration(
+          counterText: "",
+          contentPadding:
+              new EdgeInsets.symmetric(vertical: 0.0, horizontal: 5.0),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: accentColor,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey[700].withOpacity(0.5),
+              ),
+              borderRadius: BorderRadius.circular(10.0)),
+          border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey[700].withOpacity(0.5),
+              ),
+              borderRadius: BorderRadius.circular(10.0))),
+      style: TextStyle(
+        fontSize: 17,
+      ),
+    );
+  }
 }
-
-//keyboardType: TextInputType.numberWithOptions(decimal: true),
-
-

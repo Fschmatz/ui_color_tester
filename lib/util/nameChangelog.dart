@@ -1,17 +1,21 @@
 class NameChangelog{
 
-  static String appVersion = "1.3.0";
+  static String appVersion = "1.3.5";
   static String appName = "UI + Color Tester Fschmtz";
 
   static String changelogCurrent = '''  
   
 Current version:  
 
-1.3.0
-- Added Border Color
+1.3.5
+- Changed TextField Logic
+- Added Toast Message for Errors
 ''';
 
   static String changelogsOld = '''
+
+1.3.0
+- Added Border Color
 
 1.2.1
 - New Home
