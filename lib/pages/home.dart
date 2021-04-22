@@ -89,7 +89,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Color cardColor;
   double cardBorderWidth = 1;
   double cardBorderRadius = 10;
-  double cardElevation = 1.0;
+  double cardElevation = 2.0;
   double cardTitleFontSize = 17;
   double cardSubtitleFontSize = 14.5;
   double cardBorderOpacity = 0.5;
@@ -178,7 +178,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       //restore defaults
       changeCardColor('282828');
       changeCardBorderWidth(1.0);
-      changeCardElevation(1.0);
+      changeCardElevation(2.0);
       changeCardBorderRadius(10.0);
       changeCardBorderOpacity(0.5);
       changeFontSize(17.0);
@@ -219,83 +219,408 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(mainAxisSize: MainAxisSize.max, children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
-            child: Card(
-              color: cardColor,
-              shape: RoundedRectangleBorder(
+      body: ListView( children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
+          child: Card(
+            color: cardColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(cardBorderRadius),
+              side: BorderSide(
+                color: Colors.grey[cardBorderColor]
+                    .withOpacity(cardBorderOpacity),
+                width: cardBorderWidth,
+              ),
+            ),
+            elevation: cardElevation,
+            child: InkWell(
+              customBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(cardBorderRadius),
-                side: BorderSide(
-                  color: Colors.grey[cardBorderColor]
-                      .withOpacity(cardBorderOpacity),
-                  width: cardBorderWidth,
+              ),
+              onTap: () {},
+              child: Container(
+                height: 110,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: accentColor,
+                      radius: 22,
+                    ),
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 32,
+                        ),
+                        Text("Ha! Ha! Ha! What A Story Mark!",
+                            style: TextStyle(fontSize: cardTitleFontSize)),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "You're Tearing Me Apart, Lisa!",
+                          style: TextStyle(
+                              fontSize: cardSubtitleFontSize,
+                              color: Theme.of(context).hintColor),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              elevation: cardElevation,
-              child: InkWell(
-                customBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(cardBorderRadius),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 25, 15, 20),
+          child: Row(
+            children: [
+              const Text(
+                "Card Options",
+                style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+              ),
+              Expanded(
+                child: Divider(
+                  indent: 15,
+                  thickness: 2,
+                  height: 1,
                 ),
-                onTap: () {},
-                child: Container(
-                  height: 110,
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+          child: Row(children: [
+            Expanded(
+                child: Text(
+              "Background\nDef: 252525",
+              style: TextStyle(
+                  fontSize: 12.5, color: Theme.of(context).hintColor),
+            )),
+            const SizedBox(
+              width: 20,
+            ),
+            Flexible(
+              child: txtFieldFuncString(
+                  customControllerCardColor, changeCardColor),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            Expanded(
+                child: Text(
+              "Elevation\nDef: 2.0",
+              style: TextStyle(
+                  fontSize: 12.5, color: Theme.of(context).hintColor),
+            )),
+            const SizedBox(
+              width: 20,
+            ),
+            Flexible(
+              child: txtFieldFuncDouble(
+                  customControllerCardElevation, changeCardElevation),
+            ),
+          ]),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+          child: Row(children: [
+            Expanded(
+                child: Text(
+              "Border Width   \nDef: 1.0",
+              style: TextStyle(
+                  fontSize: 12.5, color: Theme.of(context).hintColor),
+            )),
+            const SizedBox(
+              width: 20,
+            ),
+            Flexible(
+              child: txtFieldFuncDouble(
+                  customControllerCardBorderWidth, changeCardBorderWidth),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            Expanded(
+                child: Text(
+              "Border Rad.\nDef: 10.0",
+              style: TextStyle(
+                  fontSize: 12.5, color: Theme.of(context).hintColor),
+            )),
+            const SizedBox(
+              width: 20,
+            ),
+            Flexible(
+              child: txtFieldFuncDouble(
+                  customControllerCardBorderRadius, changeCardBorderRadius),
+            ),
+          ]),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+          child: Row(
+            children: [
+              Expanded(
+                  child: Text(
+                "Border Opac.\nDef: 0.5\n<= 1",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: txtFieldFuncDouble(customControllerCardBorderOpacity,
+                    changeCardBorderOpacity),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                  child: Text(
+                "Font Size\nDef: Title 17\nSub 14.5",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: txtFieldFuncDouble(
+                    customControllerFontSize, changeFontSize),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(
+          height: 15,
+        ),
+        //Border COLOR BUTTONS
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 8, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "Border Color\nDef: Grey[700]",
+                    style: TextStyle(
+                        fontSize: 12.5, color: Theme.of(context).hintColor),
+                  )
+                ],
+              )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
                     children: [
-                      CircleAvatar(
-                        backgroundColor: accentColor,
-                        radius: 22,
+                      MaterialButton(
+                        minWidth: 20,
+                        height: 35,
+                        child: isSelectedGrey600
+                            ? Icon(
+                                Icons.check,
+                                color: Colors.white70,
+                              )
+                            : SizedBox.shrink(),
+                        shape: CircleBorder(
+                            side: BorderSide(
+                                width: 2,
+                                color: Colors.white.withOpacity(0.3),
+                                style: BorderStyle.solid)),
+                        elevation: 2,
+                        color: Colors.grey[600],
+                        onPressed: () {
+                          setState(() {
+                            isSelectedGrey600 = true;
+                            isSelectedGrey700 = false;
+                            isSelectedGrey800 = false;
+                            isSelectedGrey900 = false;
+                          });
+                          changeBorderColor(600);
+                        },
                       ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: 32,
-                          ),
-                          Text("Ha! Ha! Ha! What A Story Mark!",
-                              style: TextStyle(fontSize: cardTitleFontSize)),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "You're Tearing Me Apart, Lisa!",
-                            style: TextStyle(
-                                fontSize: cardSubtitleFontSize,
-                                color: Theme.of(context).hintColor),
-                          ),
-                        ],
+                      Text(
+                        "600",
+                        style: TextStyle(
+                            fontSize: 12.5,
+                            color: Theme.of(context).hintColor),
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    children: [
+                      MaterialButton(
+                        minWidth: 20,
+                        height: 35,
+                        child: isSelectedGrey700
+                            ? Icon(
+                                Icons.check,
+                                color: Colors.white70,
+                              )
+                            : SizedBox.shrink(),
+                        shape: CircleBorder(
+                            side: BorderSide(
+                                width: 2,
+                                color: Colors.white.withOpacity(0.3),
+                                style: BorderStyle.solid)),
+                        elevation: 2,
+                        color: Colors.grey[700],
+                        onPressed: () {
+                          setState(() {
+                            isSelectedGrey600 = false;
+                            isSelectedGrey700 = true;
+                            isSelectedGrey800 = false;
+                            isSelectedGrey900 = false;
+                          });
+                          changeBorderColor(700);
+                        },
+                      ),
+                      Text(
+                        "700",
+                        style: TextStyle(
+                            fontSize: 12.5,
+                            color: Theme.of(context).hintColor),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    children: [
+                      MaterialButton(
+                        minWidth: 20,
+                        height: 35,
+                        child: isSelectedGrey800
+                            ? Icon(
+                                Icons.check,
+                                color: Colors.white70,
+                              )
+                            : SizedBox.shrink(),
+                        shape: CircleBorder(
+                            side: BorderSide(
+                                width: 2,
+                                color: Colors.white.withOpacity(0.3),
+                                style: BorderStyle.solid)),
+                        elevation: 2,
+                        color: Colors.grey[800],
+                        onPressed: () {
+                          setState(() {
+                            isSelectedGrey600 = false;
+                            isSelectedGrey700 = false;
+                            isSelectedGrey800 = true;
+                            isSelectedGrey900 = false;
+                          });
+                          changeBorderColor(800);
+                        },
+                      ),
+                      Text(
+                        "800",
+                        style: TextStyle(
+                            fontSize: 12.5,
+                            color: Theme.of(context).hintColor),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    children: [
+                      MaterialButton(
+                        minWidth: 20,
+                        height: 35,
+                        child: isSelectedGrey900
+                            ? Icon(
+                                Icons.check,
+                                color: Colors.white70,
+                              )
+                            : SizedBox.shrink(),
+                        shape: CircleBorder(
+                            side: BorderSide(
+                                width: 2,
+                                color: Colors.white.withOpacity(0.3),
+                                style: BorderStyle.solid)),
+                        elevation: 2,
+                        color: Colors.grey[900],
+                        onPressed: () {
+                          setState(() {
+                            isSelectedGrey600 = false;
+                            isSelectedGrey700 = false;
+                            isSelectedGrey800 = false;
+                            isSelectedGrey900 = true;
+                          });
+                          changeBorderColor(900);
+                        },
+                      ),
+                      Text(
+                        "900",
+                        style: TextStyle(
+                            fontSize: 12.5,
+                            color: Theme.of(context).hintColor),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+          child: Row(
+            children: [
+              const Text(
+                "App Color Options",
+                style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+              ),
+              Expanded(
+                child: Divider(
+                  indent: 15,
+                  thickness: 2,
+                  height: 1,
                 ),
               ),
-            ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 25, 15, 20),
-            child: Row(
-              children: [
-                const Text(
-                  "Card Options",
-                  style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
-                ),
-                Expanded(
-                  child: Divider(
-                    indent: 15,
-                    thickness: 2,
-                    height: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: Row(children: [
+        ),
+
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+          child: Row(
+            children: [
               Expanded(
                   child: Text(
-                "Background\nDef: 252525",
+                "Background\nDef: 202020",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: txtFieldFuncString(customControllerAppBackgroundColor,
+                    changeBackgroundColor),
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                  child: Text(
+                "TopBar\nDef: 202020",
                 style: TextStyle(
                     fontSize: 12.5, color: Theme.of(context).hintColor),
               )),
@@ -304,14 +629,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ),
               Flexible(
                 child: txtFieldFuncString(
-                    customControllerCardColor, changeCardColor),
+                    customControllerAppTopBarColor, changeAppTopBarColor),
               ),
-              const SizedBox(
-                width: 20,
-              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+          child: Row(
+            children: [
               Expanded(
                   child: Text(
-                "Elevation\nDef: 1.0",
+                "BottomBar\nDef: 181818",
                 style: TextStyle(
                     fontSize: 12.5, color: Theme.of(context).hintColor),
               )),
@@ -319,20 +649,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 width: 20,
               ),
               Flexible(
-                child: txtFieldFuncDouble(
-                    customControllerCardElevation, changeCardElevation),
+                child: txtFieldFuncString(customControllerAppBottomBarColor,
+                    changeAppBottomBarColor),
               ),
-            ]),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: Row(children: [
+              const SizedBox(width: 20),
               Expanded(
                   child: Text(
-                "Border Width   \nDef: 1.0",
+                "Accent \nDef: 00BFA5",
                 style: TextStyle(
                     fontSize: 12.5, color: Theme.of(context).hintColor),
               )),
@@ -340,341 +663,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 width: 20,
               ),
               Flexible(
-                child: txtFieldFuncDouble(
-                    customControllerCardBorderWidth, changeCardBorderWidth),
+                child: txtFieldFuncString(
+                    customControllerAccentColor, changeAccentColor),
               ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                  child: Text(
-                "Border Rad.\nDef: 10.0",
-                style: TextStyle(
-                    fontSize: 12.5, color: Theme.of(context).hintColor),
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Flexible(
-                child: txtFieldFuncDouble(
-                    customControllerCardBorderRadius, changeCardBorderRadius),
-              ),
-            ]),
+            ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: Row(
-              children: [
-                Expanded(
-                    child: Text(
-                  "Border Opac.\nDef: 0.5\n<= 1",
-                  style: TextStyle(
-                      fontSize: 12.5, color: Theme.of(context).hintColor),
-                )),
-                const SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: txtFieldFuncDouble(customControllerCardBorderOpacity,
-                      changeCardBorderOpacity),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                    child: Text(
-                  "Font Size\nDef: Title 17\nSub 14.5",
-                  style: TextStyle(
-                      fontSize: 12.5, color: Theme.of(context).hintColor),
-                )),
-                const SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: txtFieldFuncDouble(
-                      customControllerFontSize, changeFontSize),
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(
-            height: 15,
-          ),
-          //Border COLOR BUTTONS
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 8, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    child: Row(
-                  children: [
-                    Text(
-                      "Border Color\nDef: Grey[700]",
-                      style: TextStyle(
-                          fontSize: 12.5, color: Theme.of(context).hintColor),
-                    )
-                  ],
-                )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        MaterialButton(
-                          minWidth: 20,
-                          height: 35,
-                          child: isSelectedGrey600
-                              ? Icon(
-                                  Icons.check,
-                                  color: Colors.white70,
-                                )
-                              : SizedBox.shrink(),
-                          shape: CircleBorder(
-                              side: BorderSide(
-                                  width: 2,
-                                  color: Colors.white.withOpacity(0.3),
-                                  style: BorderStyle.solid)),
-                          elevation: 2,
-                          color: Colors.grey[600],
-                          onPressed: () {
-                            setState(() {
-                              isSelectedGrey600 = true;
-                              isSelectedGrey700 = false;
-                              isSelectedGrey800 = false;
-                              isSelectedGrey900 = false;
-                            });
-                            changeBorderColor(600);
-                          },
-                        ),
-                        Text(
-                          "600",
-                          style: TextStyle(
-                              fontSize: 12.5,
-                              color: Theme.of(context).hintColor),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      children: [
-                        MaterialButton(
-                          minWidth: 20,
-                          height: 35,
-                          child: isSelectedGrey700
-                              ? Icon(
-                                  Icons.check,
-                                  color: Colors.white70,
-                                )
-                              : SizedBox.shrink(),
-                          shape: CircleBorder(
-                              side: BorderSide(
-                                  width: 2,
-                                  color: Colors.white.withOpacity(0.3),
-                                  style: BorderStyle.solid)),
-                          elevation: 2,
-                          color: Colors.grey[700],
-                          onPressed: () {
-                            setState(() {
-                              isSelectedGrey600 = false;
-                              isSelectedGrey700 = true;
-                              isSelectedGrey800 = false;
-                              isSelectedGrey900 = false;
-                            });
-                            changeBorderColor(700);
-                          },
-                        ),
-                        Text(
-                          "700",
-                          style: TextStyle(
-                              fontSize: 12.5,
-                              color: Theme.of(context).hintColor),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      children: [
-                        MaterialButton(
-                          minWidth: 20,
-                          height: 35,
-                          child: isSelectedGrey800
-                              ? Icon(
-                                  Icons.check,
-                                  color: Colors.white70,
-                                )
-                              : SizedBox.shrink(),
-                          shape: CircleBorder(
-                              side: BorderSide(
-                                  width: 2,
-                                  color: Colors.white.withOpacity(0.3),
-                                  style: BorderStyle.solid)),
-                          elevation: 2,
-                          color: Colors.grey[800],
-                          onPressed: () {
-                            setState(() {
-                              isSelectedGrey600 = false;
-                              isSelectedGrey700 = false;
-                              isSelectedGrey800 = true;
-                              isSelectedGrey900 = false;
-                            });
-                            changeBorderColor(800);
-                          },
-                        ),
-                        Text(
-                          "800",
-                          style: TextStyle(
-                              fontSize: 12.5,
-                              color: Theme.of(context).hintColor),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      children: [
-                        MaterialButton(
-                          minWidth: 20,
-                          height: 35,
-                          child: isSelectedGrey900
-                              ? Icon(
-                                  Icons.check,
-                                  color: Colors.white70,
-                                )
-                              : SizedBox.shrink(),
-                          shape: CircleBorder(
-                              side: BorderSide(
-                                  width: 2,
-                                  color: Colors.white.withOpacity(0.3),
-                                  style: BorderStyle.solid)),
-                          elevation: 2,
-                          color: Colors.grey[900],
-                          onPressed: () {
-                            setState(() {
-                              isSelectedGrey600 = false;
-                              isSelectedGrey700 = false;
-                              isSelectedGrey800 = false;
-                              isSelectedGrey900 = true;
-                            });
-                            changeBorderColor(900);
-                          },
-                        ),
-                        Text(
-                          "900",
-                          style: TextStyle(
-                              fontSize: 12.5,
-                              color: Theme.of(context).hintColor),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
-            child: Row(
-              children: [
-                const Text(
-                  "App Color Options",
-                  style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
-                ),
-                Expanded(
-                  child: Divider(
-                    indent: 15,
-                    thickness: 2,
-                    height: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: Row(
-              children: [
-                Expanded(
-                    child: Text(
-                  "Background\nDef: 202020",
-                  style: TextStyle(
-                      fontSize: 12.5, color: Theme.of(context).hintColor),
-                )),
-                const SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: txtFieldFuncString(customControllerAppBackgroundColor,
-                      changeBackgroundColor),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
-                    child: Text(
-                  "TopBar\nDef: 202020",
-                  style: TextStyle(
-                      fontSize: 12.5, color: Theme.of(context).hintColor),
-                )),
-                const SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: txtFieldFuncString(
-                      customControllerAppTopBarColor, changeAppTopBarColor),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: Row(
-              children: [
-                Expanded(
-                    child: Text(
-                  "BottomBar\nDef: 181818",
-                  style: TextStyle(
-                      fontSize: 12.5, color: Theme.of(context).hintColor),
-                )),
-                const SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: txtFieldFuncString(customControllerAppBottomBarColor,
-                      changeAppBottomBarColor),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
-                    child: Text(
-                  "Accent \nDef: 00BFA5",
-                  style: TextStyle(
-                      fontSize: 12.5, color: Theme.of(context).hintColor),
-                )),
-                const SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: txtFieldFuncString(
-                      customControllerAccentColor, changeAccentColor),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          )
-        ]),
-      ),
+        ),
+        const SizedBox(
+          height:20,
+        )
+      ]),
 
       //BOTTOMBAR
       bottomNavigationBar: BottomAppBar(
