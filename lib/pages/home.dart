@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'configs/configs.dart';
+import 'package:ui_color_tester/pages/listViewPage.dart';
+import 'configs/settings.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Home extends StatefulWidget {
@@ -70,7 +71,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       });
     } catch (exception) {
       Fluttertoast.showToast(
-          msg: "Invalid Value",
+        msg: "Invalid Value",
       );
     }
   }
@@ -90,15 +91,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   double cardBorderWidth = 1;
   double cardBorderRadius = 10;
   double cardElevation = 2.0;
-  double cardTitleFontSize = 17;
-  double cardSubtitleFontSize = 14.5;
+  double cardTitleFontSize = 16;
+  double cardSubtitleFontSize = 14;
   double cardBorderOpacity = 0.5;
   int cardBorderColor = 700;
 
   bool isSelectedGrey600 = false;
   bool isSelectedGrey700 = false;
   bool isSelectedGrey800 = false;
-  bool isSelectedGrey900 = false;
+  bool isSelectedGrey850 = false;
 
   void changeCardColor(String colorCode) {
     try {
@@ -137,21 +138,21 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   void changeCardBorderOpacity(double value) {
-      if(value <= 1){
-        setState(() {
-          cardBorderOpacity = value;
-        });
-      } else {
-        Fluttertoast.showToast(
-          msg: "Invalid Value\nMust Be <= 1",
-        );
-      }
+    if (value <= 1) {
+      setState(() {
+        cardBorderOpacity = value;
+      });
+    } else {
+      Fluttertoast.showToast(
+        msg: "Invalid Value\nMust Be <= 1",
+      );
+    }
   }
 
   void changeFontSize(double value) {
     setState(() {
       cardTitleFontSize = value;
-      cardSubtitleFontSize = value - 2.5;
+      cardSubtitleFontSize = value - 2;
     });
   }
 
@@ -172,7 +173,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     isSelectedGrey600 = false;
     isSelectedGrey700 = true;
     isSelectedGrey800 = false;
-    isSelectedGrey900 = false;
+    isSelectedGrey850 = false;
 
     if (useSetState) {
       //restore defaults
@@ -181,7 +182,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       changeCardElevation(2.0);
       changeCardBorderRadius(10.0);
       changeCardBorderOpacity(0.5);
-      changeFontSize(17.0);
+      changeFontSize(16.0);
       changeBorderColor(700);
 
       changeAccentColor('00BFA5');
@@ -211,7 +212,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             child: IconButton(
               icon: Icon(Icons.restore_outlined),
               tooltip: 'Reset to Defaults',
-              color: Theme.of(context).hintColor,
+              color:
+                  Theme.of(context).textTheme.headline6.color.withOpacity(0.7),
               onPressed: () {
                 populateWithDefaults(true);
               },
@@ -219,7 +221,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
         ],
       ),
-      body: ListView( children: [
+      body: ListView(children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
           child: Card(
@@ -227,8 +229,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(cardBorderRadius),
               side: BorderSide(
-                color: Colors.grey[cardBorderColor]
-                    .withOpacity(cardBorderOpacity),
+                color:
+                    Colors.grey[cardBorderColor].withOpacity(cardBorderOpacity),
                 width: cardBorderWidth,
               ),
             ),
@@ -295,8 +297,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             Expanded(
                 child: Text(
               "Background\nDef: 252525",
-              style: TextStyle(
-                  fontSize: 12.5, color: Theme.of(context).hintColor),
+              style:
+                  TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
             )),
             const SizedBox(
               width: 20,
@@ -311,8 +313,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             Expanded(
                 child: Text(
               "Elevation\nDef: 2.0",
-              style: TextStyle(
-                  fontSize: 12.5, color: Theme.of(context).hintColor),
+              style:
+                  TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
             )),
             const SizedBox(
               width: 20,
@@ -332,8 +334,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             Expanded(
                 child: Text(
               "Border Width   \nDef: 1.0",
-              style: TextStyle(
-                  fontSize: 12.5, color: Theme.of(context).hintColor),
+              style:
+                  TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
             )),
             const SizedBox(
               width: 20,
@@ -348,8 +350,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             Expanded(
                 child: Text(
               "Border Rad.\nDef: 10.0",
-              style: TextStyle(
-                  fontSize: 12.5, color: Theme.of(context).hintColor),
+              style:
+                  TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
             )),
             const SizedBox(
               width: 20,
@@ -377,15 +379,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 width: 20,
               ),
               Flexible(
-                child: txtFieldFuncDouble(customControllerCardBorderOpacity,
-                    changeCardBorderOpacity),
+                child: txtFieldFuncDouble(
+                    customControllerCardBorderOpacity, changeCardBorderOpacity),
               ),
               const SizedBox(
                 width: 20,
               ),
               Expanded(
                   child: Text(
-                "Font Size\nDef: Title 17\nSub 14.5",
+                "Font Size\nDef: Title 16\nSub 14",
                 style: TextStyle(
                     fontSize: 12.5, color: Theme.of(context).hintColor),
               )),
@@ -445,7 +447,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             isSelectedGrey600 = true;
                             isSelectedGrey700 = false;
                             isSelectedGrey800 = false;
-                            isSelectedGrey900 = false;
+                            isSelectedGrey850 = false;
                           });
                           changeBorderColor(600);
                         },
@@ -453,8 +455,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       Text(
                         "600",
                         style: TextStyle(
-                            fontSize: 12.5,
-                            color: Theme.of(context).hintColor),
+                            fontSize: 12.5, color: Theme.of(context).hintColor),
                       ),
                     ],
                   ),
@@ -484,7 +485,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             isSelectedGrey600 = false;
                             isSelectedGrey700 = true;
                             isSelectedGrey800 = false;
-                            isSelectedGrey900 = false;
+                            isSelectedGrey850 = false;
                           });
                           changeBorderColor(700);
                         },
@@ -492,8 +493,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       Text(
                         "700",
                         style: TextStyle(
-                            fontSize: 12.5,
-                            color: Theme.of(context).hintColor),
+                            fontSize: 12.5, color: Theme.of(context).hintColor),
                       ),
                     ],
                   ),
@@ -523,7 +523,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             isSelectedGrey600 = false;
                             isSelectedGrey700 = false;
                             isSelectedGrey800 = true;
-                            isSelectedGrey900 = false;
+                            isSelectedGrey850 = false;
                           });
                           changeBorderColor(800);
                         },
@@ -531,8 +531,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       Text(
                         "800",
                         style: TextStyle(
-                            fontSize: 12.5,
-                            color: Theme.of(context).hintColor),
+                            fontSize: 12.5, color: Theme.of(context).hintColor),
                       ),
                     ],
                   ),
@@ -544,7 +543,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       MaterialButton(
                         minWidth: 20,
                         height: 35,
-                        child: isSelectedGrey900
+                        child: isSelectedGrey850
                             ? Icon(
                                 Icons.check,
                                 color: Colors.white70,
@@ -556,22 +555,21 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 color: Colors.white.withOpacity(0.3),
                                 style: BorderStyle.solid)),
                         elevation: 2,
-                        color: Colors.grey[900],
+                        color: Colors.grey[850],
                         onPressed: () {
                           setState(() {
                             isSelectedGrey600 = false;
                             isSelectedGrey700 = false;
                             isSelectedGrey800 = false;
-                            isSelectedGrey900 = true;
+                            isSelectedGrey850 = true;
                           });
-                          changeBorderColor(900);
+                          changeBorderColor(850);
                         },
                       ),
                       Text(
-                        "900",
+                        "850",
                         style: TextStyle(
-                            fontSize: 12.5,
-                            color: Theme.of(context).hintColor),
+                            fontSize: 12.5, color: Theme.of(context).hintColor),
                       ),
                     ],
                   ),
@@ -614,8 +612,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 width: 20,
               ),
               Flexible(
-                child: txtFieldFuncString(customControllerAppBackgroundColor,
-                    changeBackgroundColor),
+                child: txtFieldFuncString(
+                    customControllerAppBackgroundColor, changeBackgroundColor),
               ),
               const SizedBox(width: 20),
               Expanded(
@@ -649,8 +647,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 width: 20,
               ),
               Flexible(
-                child: txtFieldFuncString(customControllerAppBottomBarColor,
-                    changeAppBottomBarColor),
+                child: txtFieldFuncString(
+                    customControllerAppBottomBarColor, changeAppBottomBarColor),
               ),
               const SizedBox(width: 20),
               Expanded(
@@ -670,7 +668,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
         ),
         const SizedBox(
-          height:20,
+          height: 20,
         )
       ]),
 
@@ -680,20 +678,48 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                     splashRadius: 30,
                     icon: Icon(
-                      Icons.settings_outlined,
-                      size: 24,
-                      color: Theme.of(context).hintColor,
+                      Icons.format_list_bulleted_outlined,
+                      color: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .color
+                          .withOpacity(0.7),
                     ),
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) => Configs(),
+                            builder: (BuildContext context) => ListViewPage(
+                              top: appTopBarColor,
+                              back: backgroundColor,
+                              bottomBar: bottomBarColor,
+                              titleFontSize: cardTitleFontSize,
+                              subtitleFontSize: cardSubtitleFontSize,
+                              populateWithDefaults: populateWithDefaults,
+                            ),
+
+                          ));
+                    }),
+                IconButton(
+                    splashRadius: 30,
+                    icon: Icon(
+                      Icons.settings_outlined,
+                      color: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .color
+                          .withOpacity(0.7),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => Settings(),
                             fullscreenDialog: true,
                           ));
                     }),
