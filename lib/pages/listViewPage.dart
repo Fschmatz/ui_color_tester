@@ -6,14 +6,16 @@ class ListViewPage extends StatefulWidget {
   Color bottomBar;
   double titleFontSize;
   double subtitleFontSize;
-  Function(bool) populateWithDefaults;
+  Function() populateWithDefaultsValues;
+  Function() refreshUI;
 
   ListViewPage(
       {Key key,
       this.back,
       this.top,
       this.bottomBar,
-      this.populateWithDefaults,
+      this.populateWithDefaultsValues,
+      this.refreshUI,
       this.titleFontSize,
       this.subtitleFontSize})
       : super(key: key);
@@ -40,7 +42,8 @@ class _ListViewPageState extends State<ListViewPage> {
               color:
                   Theme.of(context).textTheme.headline6.color.withOpacity(0.7),
               onPressed: () {
-                widget.populateWithDefaults(true);
+                widget.refreshUI();
+                widget.populateWithDefaultsValues();
                 setState(() {
                   widget.top = Color(0xFF202020);
                   widget.back = Color(0xFF202020);
@@ -65,7 +68,7 @@ class _ListViewPageState extends State<ListViewPage> {
                   return ListTile(
                       onTap: () {},
                       title: Text(
-                          "Johnny: I did not hit her, it's not true! It's bullshit! I did not hit her!",
+                          "Johnny: I did not hit her, it's not true! It's bullshit! I did not hit her!\n[throws water bottle]\nJohnny: I did *not*. Oh hi, Mark!",
                           style: TextStyle(
                             fontSize: widget.titleFontSize,
                           )),
@@ -73,16 +76,13 @@ class _ListViewPageState extends State<ListViewPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "[throws water bottle]\nJohnny: I did *not*. Oh hi, Mark!",
+                            "Roof Scene",
                             style: TextStyle(
-                                fontSize: widget.subtitleFontSize,
-                                color: Theme.of(context).hintColor),
+                                fontSize: widget.subtitleFontSize),
                           ),
                           IconButton(
-                              splashRadius: 25,
                               color: Theme.of(context).hintColor,
                               icon: Icon(Icons.share_outlined),
-                              iconSize: 21,
                               onPressed: () {}),
                         ],
                       ));
@@ -121,10 +121,8 @@ class _ListViewPageState extends State<ListViewPage> {
                               color: Theme.of(context).hintColor),
                         ),
                         IconButton(
-                            splashRadius: 25,
                             color: Theme.of(context).hintColor,
                             icon: Icon(Icons.share_outlined),
-                            iconSize: 21,
                             onPressed: () {}),
                       ],
                     ),

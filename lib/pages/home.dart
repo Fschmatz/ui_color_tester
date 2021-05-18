@@ -88,7 +88,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   TextEditingController customControllerFontSize = TextEditingController();
 
   Color cardColor;
-  double cardBorderWidth = 1;
+  double cardBorderWidth = 1.0;
   double cardBorderRadius = 10;
   double cardElevation = 2.0;
   double cardTitleFontSize = 16;
@@ -156,7 +156,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     });
   }
 
-  void populateWithDefaults(bool useSetState) {
+  void populateTextFieldsWithDefaultValues(){
+    setState(() {
+
+    });
     //CARD
     customControllerCardColor.text = '282828';
     customControllerCardBorderWidth.text = cardBorderWidth.toString();
@@ -174,8 +177,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     isSelectedGrey700 = true;
     isSelectedGrey800 = false;
     isSelectedGrey850 = false;
+  }
 
-    if (useSetState) {
+  void refreshUI(){
       //restore defaults
       changeCardColor('282828');
       changeCardBorderWidth(1.0);
@@ -189,13 +193,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       changeBackgroundColor('202020');
       changeAppTopBarColor('202020');
       changeAppBottomBarColor('181818');
-    }
   }
 
   @override
   void initState() {
     super.initState();
-    populateWithDefaults(false);
+    populateTextFieldsWithDefaultValues();
   }
 
   @override
@@ -212,10 +215,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             child: IconButton(
               icon: Icon(Icons.restore_outlined),
               tooltip: 'Reset to Defaults',
-              color:
-                  Theme.of(context).textTheme.headline6.color.withOpacity(0.7),
               onPressed: () {
-                populateWithDefaults(true);
+                refreshUI();
+                populateTextFieldsWithDefaultValues();
               },
             ),
           ),
@@ -700,9 +702,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               bottomBar: bottomBarColor,
                               titleFontSize: cardTitleFontSize,
                               subtitleFontSize: cardSubtitleFontSize,
-                              populateWithDefaults: populateWithDefaults,
+                              populateWithDefaultsValues: populateTextFieldsWithDefaultValues,
+                              refreshUI: refreshUI,
                             ),
-
                           ));
                     }),
                 IconButton(
