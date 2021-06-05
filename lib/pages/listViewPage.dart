@@ -25,13 +25,16 @@ class ListViewPage extends StatefulWidget {
 }
 
 class _ListViewPageState extends State<ListViewPage> {
+
+  bool showDivider = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: widget.back,
       appBar: AppBar(
         backgroundColor: widget.top,
-        title: Text("ListView"),
+        title: Text("ListView + Divider"),
         elevation: 0,
         actions: [
           Padding(
@@ -59,7 +62,8 @@ class _ListViewPageState extends State<ListViewPage> {
       body: ListView(
         children: [
           ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
+              separatorBuilder: (context, index) =>
+                  showDivider ? Divider(height: 15,) : SizedBox(height: 15),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 20,
@@ -141,7 +145,7 @@ class _ListViewPageState extends State<ListViewPage> {
                 IconButton(
                     splashRadius: 30,
                     icon: Icon(
-                      Icons.close,
+                      Icons.remove_red_eye_outlined,
                       color: Theme.of(context)
                           .textTheme
                           .headline6
@@ -149,7 +153,9 @@ class _ListViewPageState extends State<ListViewPage> {
                           .withOpacity(0.7),
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
+                     setState(() {
+                       showDivider = !showDivider;
+                     });
                     }),
               ],
             ),

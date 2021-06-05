@@ -112,8 +112,8 @@ class AppInfo extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.messenger_outline),
             title: Text(
-              "Before software can be reusable,it first has to be usable.\nRalph Johnson",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              "Before software can be reusable, it first has to be usable.\nRalph Johnson",
+              style: TextStyle(fontSize: 16),
             ),
           ),
         ]));

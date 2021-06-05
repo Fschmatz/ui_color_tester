@@ -1,16 +1,21 @@
 class NameChangelog{
 
-  static String appVersion = "1.4.1";
+  static String appVersion = "1.5.0";
   static String appName = "UI + Color Tester Fschmtz";
 
   static String changelogCurrent = '''  
-1.4.1
-- ListView + Divider Page
-- New Settings Page
-- Refresh Bug Fixed
+1.5.0
+- Changed Some of the Default Values
+- Border Off Button
+- ListView Hide/Show Divider Button
 ''';
 
   static String changelogsOld = '''
+1.4.0
+- ListView + Divider Page
+- New Settings Page
+- Refresh Bug Fixed
+
 1.3.5
 - Changed TextField Logic
 - Added Toast Message for Errors
