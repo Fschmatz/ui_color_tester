@@ -429,7 +429,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         )
                       ],
                     )),
-                    const SizedBox(width: 30,),
+                    const SizedBox(width: 10,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
