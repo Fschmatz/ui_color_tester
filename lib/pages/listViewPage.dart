@@ -25,11 +25,20 @@ class ListViewPage extends StatefulWidget {
 }
 
 class _ListViewPageState extends State<ListViewPage> {
-
   bool showDivider = true;
 
   @override
   Widget build(BuildContext context) {
+    Icon iconShowDivider = showDivider
+        ? Icon(
+            Icons.visibility_off_outlined,
+            color: Theme.of(context).textTheme.headline6.color.withOpacity(0.7),
+          )
+        : Icon(
+            Icons.visibility_outlined,
+            color: Theme.of(context).textTheme.headline6.color.withOpacity(0.7),
+          );
+
     return Scaffold(
       backgroundColor: widget.back,
       appBar: AppBar(
@@ -50,7 +59,7 @@ class _ListViewPageState extends State<ListViewPage> {
                 setState(() {
                   widget.top = Color(0xFF202020);
                   widget.back = Color(0xFF202020);
-                  widget.bottomBar = Color(0xFF181818);
+                  widget.bottomBar = Color(0xFF171717);
                   widget.titleFontSize = 16;
                   widget.subtitleFontSize = 13.5;
                 });
@@ -62,8 +71,11 @@ class _ListViewPageState extends State<ListViewPage> {
       body: ListView(
         children: [
           ListView.separated(
-              separatorBuilder: (context, index) =>
-                  showDivider ? Divider(height: 15,) : SizedBox(height: 15),
+              separatorBuilder: (context, index) => showDivider
+                  ? Divider(
+                      height: 15,
+                    )
+                  : SizedBox(height: 15),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 20,
@@ -81,8 +93,7 @@ class _ListViewPageState extends State<ListViewPage> {
                         children: [
                           Text(
                             "Roof Scene",
-                            style: TextStyle(
-                                fontSize: widget.subtitleFontSize),
+                            style: TextStyle(fontSize: widget.subtitleFontSize),
                           ),
                           IconButton(
                               color: Theme.of(context).hintColor,
@@ -144,18 +155,12 @@ class _ListViewPageState extends State<ListViewPage> {
               children: [
                 IconButton(
                     splashRadius: 30,
-                    icon: Icon(
-                      Icons.remove_red_eye_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .color
-                          .withOpacity(0.7),
-                    ),
+                    icon: iconShowDivider,
+                    tooltip: 'Show/Hide Divider',
                     onPressed: () {
-                     setState(() {
-                       showDivider = !showDivider;
-                     });
+                      setState(() {
+                        showDivider = !showDivider;
+                      });
                     }),
               ],
             ),

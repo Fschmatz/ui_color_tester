@@ -1,12 +1,13 @@
 class NameChangelog{
 
-  static String appVersion = "1.5.0";
+  static String appVersion = "1.5.1";
   static String appName = "UI + Color Tester Fschmtz";
 
   static String changelogCurrent = '''  
-1.5.0
+1.5.1
 - Changed Some of the Default Values
 - Border Off Button
+- ListView Horizontal on Border Buttons
 - ListView Hide/Show Divider Button
 ''';
 

@@ -27,16 +27,16 @@ import 'package:shared_preferences/shared_preferences.dart';
     scaffoldBackgroundColor: Color(0xFF202020),
 
     cardTheme: CardTheme(
-      color: Color(0xFF282828),
+      color: Color(0xFF2A2A2A),
     ),
 
     dialogTheme: DialogTheme(
       backgroundColor: Color(0xFF202020),
     ),
 
-    bottomAppBarColor: Color(0xFF181818),
+    bottomAppBarColor: Color(0xFF171717),
     bottomSheetTheme:
-      BottomSheetThemeData(modalBackgroundColor: Color(0xFF181818))
+      BottomSheetThemeData(modalBackgroundColor: Color(0xFF171717))
     );
 
 class ThemeNotifier extends ChangeNotifier {

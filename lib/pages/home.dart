@@ -87,9 +87,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       TextEditingController();
   TextEditingController customControllerFontSize = TextEditingController();
 
-  Color cardColor = Color(0xFF282828);
+  Color cardColor = Color(0xFF2A2A2A);
   double cardBorderWidth = 1.0;
-  double cardBorderRadius = 15;
+  double cardBorderRadius = 20;
   double cardElevation = 1.0;
   double cardTitleFontSize = 16;
   double cardSubtitleFontSize = 14;
@@ -162,7 +162,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
     });
     //CARD
-    customControllerCardColor.text = '282828';
+    customControllerCardColor.text = '2A2A2A';
     customControllerCardBorderWidth.text = cardBorderWidth.toString();
     customControllerCardElevation.text = cardElevation.toString();
     customControllerCardBorderRadius.text = cardBorderRadius.toString();
@@ -172,7 +172,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     //APP
     customControllerAppBackgroundColor.text = '202020';
     customControllerAppTopBarColor.text = '202020';
-    customControllerAppBottomBarColor.text = '181818';
+    customControllerAppBottomBarColor.text = '171717';
     customControllerAccentColor.text = '00BFA5';
     isSelectedGrey600 = false;
     isSelectedGrey700 = true;
@@ -183,10 +183,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   void refreshUI(){
       //restore defaults
-      changeCardColor('282828');
+      changeCardColor('2A2A2A');
       changeCardBorderWidth(1.0);
       changeCardElevation(1.0);
-      changeCardBorderRadius(15.0);
+      changeCardBorderRadius(20.0);
       changeCardBorderOpacity(1.0);
       changeFontSize(16.0);
       changeBorderColor(700);
@@ -194,7 +194,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       changeAccentColor('00BFA5');
       changeBackgroundColor('202020');
       changeAppTopBarColor('202020');
-      changeAppBottomBarColor('181818');
+      changeAppBottomBarColor('171717');
   }
 
   @override
@@ -300,7 +300,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: Row(children: [
             Expanded(
                 child: Text(
-              "Background\nDef: 252525",
+              "Background\nDef: 2A2A2A",
               style:
                   TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
             )),
@@ -353,7 +353,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             Expanded(
                 child: Text(
-              "Border Rad.\nDef: 15.0",
+              "Border Rad.\nDef: 20.0",
               style:
                   TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
             )),
@@ -412,223 +412,231 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         //Border COLOR BUTTONS
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 0, 8, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                  child: Row(
-                children: [
-                  Text(
-                    "Border Color\nDef: Grey[700]",
-                    style: TextStyle(
-                        fontSize: 12.5, color: Theme.of(context).hintColor),
-                  )
-                ],
-              )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      MaterialButton(
-                        minWidth: 20,
-                        height: 35,
-                        child: isSelectedButtonBorderOff
-                            ? Icon(
-                          Icons.check,
-                          color: Colors.white,
-                        )
-                            : SizedBox.shrink(),
-                        shape: CircleBorder(
-                            side: BorderSide(
-                                width: 2,
-                                color: Colors.white.withOpacity(0.3),
-                                style: BorderStyle.solid)),
-                        elevation: 2,
-                        onPressed: () {
-                          setState(() {
-                            isSelectedButtonBorderOff = true;
-                            isSelectedGrey600 = false;
-                            isSelectedGrey700 = false;
-                            isSelectedGrey800 = false;
-                            isSelectedGrey850 = false;
-                          });
-                          changeBorderColor(700);
-                        },
-                      ),
-                      Text(
-                        "Border\nOff",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 12.5, color: Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    children: [
-                      MaterialButton(
-                        minWidth: 20,
-                        height: 35,
-                        child: isSelectedGrey600
-                            ? Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              )
-                            : SizedBox.shrink(),
-                        shape: CircleBorder(
-                            side: BorderSide(
-                                width: 2,
-                                color: Colors.white.withOpacity(0.3),
-                                style: BorderStyle.solid)),
-                        elevation: 2,
-                        color: Colors.grey[600],
-                        onPressed: () {
-                          setState(() {
-                            isSelectedGrey600 = true;
-                            isSelectedGrey700 = false;
-                            isSelectedGrey800 = false;
-                            isSelectedGrey850 = false;
-                            isSelectedButtonBorderOff = false;
-                          });
-                          changeBorderColor(600);
-                        },
-                      ),
-                      Text(
-                        "[ 600 ]\n757575",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 12.5, color: Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    children: [
-                      MaterialButton(
-                        minWidth: 20,
-                        height: 35,
-                        child: isSelectedGrey700
-                            ? Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              )
-                            : SizedBox.shrink(),
-                        shape: CircleBorder(
-                            side: BorderSide(
-                                width: 2,
-                                color: Colors.white.withOpacity(0.3),
-                                style: BorderStyle.solid)),
-                        elevation: 2,
-                        color: Colors.grey[700],
-                        onPressed: () {
-                          setState(() {
-                            isSelectedGrey600 = false;
-                            isSelectedGrey700 = true;
-                            isSelectedGrey800 = false;
-                            isSelectedGrey850 = false;
-                            isSelectedButtonBorderOff = false;
-                          });
-                          changeBorderColor(700);
-                        },
-                      ),
-                      Text(
-                        "[ 700 ]\n616161",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 12.5, color: Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    children: [
-                      MaterialButton(
-                        minWidth: 20,
-                        height: 35,
-                        child: isSelectedGrey800
-                            ? Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              )
-                            : SizedBox.shrink(),
-                        shape: CircleBorder(
-                            side: BorderSide(
-                                width: 2,
-                                color: Colors.white.withOpacity(0.3),
-                                style: BorderStyle.solid)),
-                        elevation: 2,
-                        color: Colors.grey[800],
-                        onPressed: () {
-                          setState(() {
-                            isSelectedGrey600 = false;
-                            isSelectedGrey700 = false;
-                            isSelectedGrey800 = true;
-                            isSelectedGrey850 = false;
-                            isSelectedButtonBorderOff = false;
-                          });
-                          changeBorderColor(800);
-                        },
-                      ),
-                      Text(
-                        "[ 800 ]\n424242",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 12.5, color: Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    children: [
-                      MaterialButton(
-                        minWidth: 20,
-                        height: 35,
-                        child: isSelectedGrey850
-                            ? Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              )
-                            : SizedBox.shrink(),
-                        shape: CircleBorder(
-                            side: BorderSide(
-                                width: 2,
-                                color: Colors.white.withOpacity(0.3),
-                                style: BorderStyle.solid)),
-                        elevation: 2,
-                        color: Colors.grey[850],
-                        onPressed: () {
-                          setState(() {
-                            isSelectedGrey600 = false;
-                            isSelectedGrey700 = false;
-                            isSelectedGrey800 = false;
-                            isSelectedGrey850 = true;
-                            isSelectedButtonBorderOff = false;
-                          });
-                          changeBorderColor(850);
-                        },
-                      ),
-                      Center(
-                        child: Text(
-                          "[ 850 ]\n303030",
-                          textAlign: TextAlign.center,
+          child: Container(
+            height: 80.0,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                        child: Row(
+                      children: [
+                        Text(
+                          "Border Color\nDef: Grey[700]",
                           style: TextStyle(
                               fontSize: 12.5, color: Theme.of(context).hintColor),
+                        )
+                      ],
+                    )),
+                    const SizedBox(width: 30,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            MaterialButton(
+                              minWidth: 20,
+                              height: 35,
+                              child: isSelectedButtonBorderOff
+                                  ? Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              )
+                                  : SizedBox.shrink(),
+                              shape: CircleBorder(
+                                  side: BorderSide(
+                                      width: 2,
+                                      color: Colors.white.withOpacity(0.3),
+                                      style: BorderStyle.solid)),
+                              elevation: 2,
+                              onPressed: () {
+                                setState(() {
+                                  isSelectedButtonBorderOff = true;
+                                  isSelectedGrey600 = false;
+                                  isSelectedGrey700 = false;
+                                  isSelectedGrey800 = false;
+                                  isSelectedGrey850 = false;
+                                });
+                                changeBorderColor(700);
+                              },
+                            ),
+                            Text(
+                              "Border\nOff",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 12.5, color: Theme.of(context).hintColor),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            MaterialButton(
+                              minWidth: 20,
+                              height: 35,
+                              child: isSelectedGrey600
+                                  ? Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : SizedBox.shrink(),
+                              shape: CircleBorder(
+                                  side: BorderSide(
+                                      width: 2,
+                                      color: Colors.white.withOpacity(0.3),
+                                      style: BorderStyle.solid)),
+                              elevation: 2,
+                              color: Colors.grey[600],
+                              onPressed: () {
+                                setState(() {
+                                  isSelectedGrey600 = true;
+                                  isSelectedGrey700 = false;
+                                  isSelectedGrey800 = false;
+                                  isSelectedGrey850 = false;
+                                  isSelectedButtonBorderOff = false;
+                                });
+                                changeBorderColor(600);
+                              },
+                            ),
+                            Text(
+                              "[ 600 ]\n757575",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 12.5, color: Theme.of(context).hintColor),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            MaterialButton(
+                              minWidth: 20,
+                              height: 35,
+                              child: isSelectedGrey700
+                                  ? Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : SizedBox.shrink(),
+                              shape: CircleBorder(
+                                  side: BorderSide(
+                                      width: 2,
+                                      color: Colors.white.withOpacity(0.3),
+                                      style: BorderStyle.solid)),
+                              elevation: 2,
+                              color: Colors.grey[700],
+                              onPressed: () {
+                                setState(() {
+                                  isSelectedGrey600 = false;
+                                  isSelectedGrey700 = true;
+                                  isSelectedGrey800 = false;
+                                  isSelectedGrey850 = false;
+                                  isSelectedButtonBorderOff = false;
+                                });
+                                changeBorderColor(700);
+                              },
+                            ),
+                            Text(
+                              "[ 700 ]\n616161",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 12.5, color: Theme.of(context).hintColor),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            MaterialButton(
+                              minWidth: 20,
+                              height: 35,
+                              child: isSelectedGrey800
+                                  ? Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : SizedBox.shrink(),
+                              shape: CircleBorder(
+                                  side: BorderSide(
+                                      width: 2,
+                                      color: Colors.white.withOpacity(0.3),
+                                      style: BorderStyle.solid)),
+                              elevation: 2,
+                              color: Colors.grey[800],
+                              onPressed: () {
+                                setState(() {
+                                  isSelectedGrey600 = false;
+                                  isSelectedGrey700 = false;
+                                  isSelectedGrey800 = true;
+                                  isSelectedGrey850 = false;
+                                  isSelectedButtonBorderOff = false;
+                                });
+                                changeBorderColor(800);
+                              },
+                            ),
+                            Text(
+                              "[ 800 ]\n424242",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 12.5, color: Theme.of(context).hintColor),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            MaterialButton(
+                              minWidth: 20,
+                              height: 35,
+                              child: isSelectedGrey850
+                                  ? Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : SizedBox.shrink(),
+                              shape: CircleBorder(
+                                  side: BorderSide(
+                                      width: 2,
+                                      color: Colors.white.withOpacity(0.3),
+                                      style: BorderStyle.solid)),
+                              elevation: 2,
+                              color: Colors.grey[850],
+                              onPressed: () {
+                                setState(() {
+                                  isSelectedGrey600 = false;
+                                  isSelectedGrey700 = false;
+                                  isSelectedGrey800 = false;
+                                  isSelectedGrey850 = true;
+                                  isSelectedButtonBorderOff = false;
+                                });
+                                changeBorderColor(850);
+                              },
+                            ),
+                            Center(
+                              child: Text(
+                                "[ 850 ]\n303030",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 12.5, color: Theme.of(context).hintColor),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
 
@@ -692,7 +700,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             children: [
               Expanded(
                   child: Text(
-                "BottomBar\nDef: 181818",
+                "BottomBar\nDef: 171717",
                 style: TextStyle(
                     fontSize: 12.5, color: Theme.of(context).hintColor),
               )),
