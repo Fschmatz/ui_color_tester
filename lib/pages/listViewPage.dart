@@ -61,7 +61,7 @@ class _ListViewPageState extends State<ListViewPage> {
                   widget.back = Color(0xFF202020);
                   widget.bottomBar = Color(0xFF171717);
                   widget.titleFontSize = 16;
-                  widget.subtitleFontSize = 13.5;
+                  widget.subtitleFontSize = 14;
                 });
               },
             ),

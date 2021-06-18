@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:ui_color_tester/pages/fakeHome.dart';
 import 'package:ui_color_tester/pages/listViewPage.dart';
 import 'configs/settings.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -761,6 +762,32 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               bottomBar: bottomBarColor,
                               titleFontSize: cardTitleFontSize,
                               subtitleFontSize: cardSubtitleFontSize,
+                              populateWithDefaultsValues: populateTextFieldsWithDefaultValues,
+                              refreshUI: refreshUI,
+                            ),
+                          ));
+                    }),
+                IconButton(
+                    splashRadius: 30,
+                    icon: Icon(
+                      Icons.home_outlined,
+                      color: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .color
+                          .withOpacity(0.7),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => FakeHome(
+                              top: appTopBarColor,
+                              back: backgroundColor,
+                              bottomBar: bottomBarColor,
+                              titleFontSize: cardTitleFontSize,
+                              subtitleFontSize: cardSubtitleFontSize,
+                              accentButton: accentColor,
                               populateWithDefaultsValues: populateTextFieldsWithDefaultValues,
                               refreshUI: refreshUI,
                             ),

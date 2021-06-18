@@ -1,17 +1,20 @@
 class NameChangelog{
 
-  static String appVersion = "1.5.1";
+  static String appVersion = "1.6.0";
   static String appName = "UI + Color Tester Fschmtz";
 
   static String changelogCurrent = '''  
+1.6.0
+- Added a Fake Home Page
+''';
+
+  static String changelogsOld = '''
 1.5.1
 - Changed Some of the Default Values
 - Border Off Button
 - ListView Horizontal on Border Buttons
 - ListView Hide/Show Divider Button
-''';
 
-  static String changelogsOld = '''
 1.4.0
 - ListView + Divider Page
 - New Settings Page
