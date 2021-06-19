@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:ui_color_tester/pages/fakeHome.dart';
 import 'package:ui_color_tester/pages/listViewPage.dart';
 import 'configs/settings.dart';
@@ -28,6 +29,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Color appTopBarColor;
   Color bottomBarColor;
   Color accentColor = Colors.tealAccent[700];
+
+  void changeColor(Color color) => setState(() => accentColor = color);
 
   void changeAccentColor(String colorCode) {
     try {
@@ -158,10 +161,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     });
   }
 
-  void populateTextFieldsWithDefaultValues(){
-    setState(() {
-
-    });
+  void populateTextFieldsWithDefaultValues() {
+    setState(() {});
     //CARD
     customControllerCardColor.text = '2A2A2A';
     customControllerCardBorderWidth.text = cardBorderWidth.toString();
@@ -182,20 +183,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     isSelectedButtonBorderOff = false;
   }
 
-  void refreshUI(){
-      //restore defaults
-      changeCardColor('2A2A2A');
-      changeCardBorderWidth(1.0);
-      changeCardElevation(1.0);
-      changeCardBorderRadius(20.0);
-      changeCardBorderOpacity(1.0);
-      changeFontSize(16.0);
-      changeBorderColor(700);
+  void refreshUI() {
+    //restore defaults
+    changeCardColor('2A2A2A');
+    changeCardBorderWidth(1.0);
+    changeCardElevation(1.0);
+    changeCardBorderRadius(20.0);
+    changeCardBorderOpacity(1.0);
+    changeFontSize(16.0);
+    changeBorderColor(700);
 
-      changeAccentColor('00BFA5');
-      changeBackgroundColor('202020');
-      changeAppTopBarColor('202020');
-      changeAppBottomBarColor('171717');
+    changeAccentColor('00BFA5');
+    changeBackgroundColor('202020');
+    changeAppTopBarColor('202020');
+    changeAppBottomBarColor('171717');
   }
 
   @override
@@ -234,8 +235,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(cardBorderRadius),
               side: BorderSide(
-                color: isSelectedButtonBorderOff ? cardColor :
-                    Colors.grey[cardBorderColor].withOpacity(cardBorderOpacity),
+                color: isSelectedButtonBorderOff
+                    ? cardColor
+                    : Colors.grey[cardBorderColor]
+                        .withOpacity(cardBorderOpacity),
                 width: cardBorderWidth,
               ),
             ),
@@ -426,11 +429,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         Text(
                           "Border Color\nDef: Grey[700]",
                           style: TextStyle(
-                              fontSize: 12.5, color: Theme.of(context).hintColor),
+                              fontSize: 12.5,
+                              color: Theme.of(context).hintColor),
                         )
                       ],
                     )),
-                    const SizedBox(width: 10,),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -441,9 +447,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               height: 35,
                               child: isSelectedButtonBorderOff
                                   ? Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              )
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
                                   : SizedBox.shrink(),
                               shape: CircleBorder(
                                   side: BorderSide(
@@ -466,7 +472,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               "Border\nOff",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 12.5, color: Theme.of(context).hintColor),
+                                  fontSize: 12.5,
+                                  color: Theme.of(context).hintColor),
                             ),
                           ],
                         ),
@@ -506,7 +513,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               "[ 600 ]\n757575",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 12.5, color: Theme.of(context).hintColor),
+                                  fontSize: 12.5,
+                                  color: Theme.of(context).hintColor),
                             ),
                           ],
                         ),
@@ -546,7 +554,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               "[ 700 ]\n616161",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 12.5, color: Theme.of(context).hintColor),
+                                  fontSize: 12.5,
+                                  color: Theme.of(context).hintColor),
                             ),
                           ],
                         ),
@@ -586,7 +595,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               "[ 800 ]\n424242",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 12.5, color: Theme.of(context).hintColor),
+                                  fontSize: 12.5,
+                                  color: Theme.of(context).hintColor),
                             ),
                           ],
                         ),
@@ -627,7 +637,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 "[ 850 ]\n303030",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 12.5, color: Theme.of(context).hintColor),
+                                    fontSize: 12.5,
+                                    color: Theme.of(context).hintColor),
                               ),
                             ),
                           ],
@@ -720,12 +731,57 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     fontSize: 12.5, color: Theme.of(context).hintColor),
               )),
               const SizedBox(
-                width: 20,
+                width: 22,
               ),
-              Flexible(
-                child: txtFieldFuncString(
-                    customControllerAccentColor, changeAccentColor),
-              ),
+              Container(
+                width: 85,
+                height: 45,
+                child: TextButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      primary: backgroundColor,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: Colors.grey[700].withOpacity(0.5),
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            titlePadding: const EdgeInsets.all(0.0),
+                            contentPadding: const EdgeInsets.all(0.0),
+                            content: SingleChildScrollView(
+                              child: ColorPicker(
+                                pickerColor: accentColor,
+                                onColorChanged: changeColor,
+                                colorPickerWidth: 300.0,
+                                pickerAreaHeightPercent: 1.0,
+                                enableAlpha: false,
+                                displayThumbColor: true,
+                                showLabel: true,
+                                paletteType: PaletteType.hsv,
+                                pickerAreaBorderRadius: const BorderRadius.only(
+                                  topLeft: const Radius.circular(2.0),
+                                  topRight: const Radius.circular(2.0),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Text(
+                      accentColor.toString().substring(10, 16).toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: accentColor,
+                      ),
+                    )),
+              )
             ],
           ),
         ),
@@ -762,7 +818,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               bottomBar: bottomBarColor,
                               titleFontSize: cardTitleFontSize,
                               subtitleFontSize: cardSubtitleFontSize,
-                              populateWithDefaultsValues: populateTextFieldsWithDefaultValues,
+                              populateWithDefaultsValues:
+                                  populateTextFieldsWithDefaultValues,
                               refreshUI: refreshUI,
                             ),
                           ));
@@ -788,7 +845,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               titleFontSize: cardTitleFontSize,
                               subtitleFontSize: cardSubtitleFontSize,
                               accentColor: accentColor,
-                              populateWithDefaultsValues: populateTextFieldsWithDefaultValues,
+                              populateWithDefaultsValues:
+                                  populateTextFieldsWithDefaultValues,
                               refreshUI: refreshUI,
                             ),
                           ));
