@@ -787,7 +787,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               bottomBar: bottomBarColor,
                               titleFontSize: cardTitleFontSize,
                               subtitleFontSize: cardSubtitleFontSize,
-                              accentButton: accentColor,
+                              accentColor: accentColor,
                               populateWithDefaultsValues: populateTextFieldsWithDefaultValues,
                               refreshUI: refreshUI,
                             ),
