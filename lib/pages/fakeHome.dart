@@ -50,7 +50,7 @@ class _FakeHomeState extends State<FakeHome> {
                   widget.top = Color(0xFF202020);
                   widget.back = Color(0xFF202020);
                   widget.bottomBar = Color(0xFF171717);
-                  widget.accentColor = Color(0xFF00BFA5);
+                  widget.accentColor = Color(0xFF20BFA5);
                   widget.titleFontSize = 16;
                   widget.subtitleFontSize = 14;
                 });
@@ -96,7 +96,6 @@ Flower Shop Clerk: Buh-bye!''',
             leading: CircleAvatar(
               backgroundColor: widget.accentColor,
             ),
-            onTap: () {},
           ),
           ListTile(
             leading: SizedBox(
@@ -124,7 +123,6 @@ Johnny: You think about everything, ha ha ha.
             leading: CircleAvatar(
               backgroundColor: widget.accentColor,
             ),
-            onTap: () {},
           ),
           ListTile(
             leading: SizedBox(
@@ -151,7 +149,6 @@ Claudette: I got the results of the test back - I definitely have breast cancer.
             leading: CircleAvatar(
               backgroundColor: widget.accentColor,
             ),
-            onTap: () {},
           ),
           ListTile(
             leading: SizedBox(
@@ -176,7 +173,6 @@ Johnny: Thank you, honey, this is a beautiful party! You invited all my friends.
             leading: CircleAvatar(
               backgroundColor: widget.accentColor,
             ),
-            onTap: () {},
           ),
           ListTile(
             leading: SizedBox(
@@ -220,7 +216,6 @@ Johnny: Let's take him to the police.
             leading: CircleAvatar(
               backgroundColor: widget.accentColor,
             ),
-            onTap: () {},
           ),
           const SizedBox(
             height: 40,

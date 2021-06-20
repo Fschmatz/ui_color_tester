@@ -23,7 +23,7 @@ import 'package:shared_preferences/shared_preferences.dart';
     ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Color(0xFF202020),
-    accentColor: Colors.tealAccent[700],
+    accentColor: Color(0xFF606060),
     scaffoldBackgroundColor: Color(0xFF202020),
 
     cardTheme: CardTheme(

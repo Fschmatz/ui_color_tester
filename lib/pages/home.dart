@@ -30,7 +30,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Color bottomBarColor;
   Color accentColor = Colors.tealAccent[700];
 
-  void changeColor(Color color) => setState(() => accentColor = color);
+  void changeColorPicker(Color color) => setState(() => {
+        accentColor = color,
+        customControllerAccentColor.text =
+            accentColor.toString().substring(10, 16).toUpperCase(),
+      });
 
   void changeAccentColor(String colorCode) {
     try {
@@ -175,7 +179,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     customControllerAppBackgroundColor.text = '202020';
     customControllerAppTopBarColor.text = '202020';
     customControllerAppBottomBarColor.text = '171717';
-    customControllerAccentColor.text = '00BFA5';
+    customControllerAccentColor.text = '20BFA5';
     isSelectedGrey600 = false;
     isSelectedGrey700 = true;
     isSelectedGrey800 = false;
@@ -193,7 +197,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     changeFontSize(16.0);
     changeBorderColor(700);
 
-    changeAccentColor('00BFA5');
+    changeAccentColor('20BFA5');
     changeBackgroundColor('202020');
     changeAppTopBarColor('202020');
     changeAppBottomBarColor('171717');
@@ -205,548 +209,543 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     populateTextFieldsWithDefaultValues();
   }
 
+  void loseFocus() {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        backgroundColor: appTopBarColor,
-        title: Text("UI + Color Tester"),
-        elevation: 0,
-        actions: [
+    return GestureDetector(
+      onTap: () {
+        loseFocus();
+      },
+      child: Scaffold(
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+          backgroundColor: appTopBarColor,
+          title: Text("UI + Color Tester"),
+          elevation: 0,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+              child: IconButton(
+                icon: Icon(Icons.restore_outlined),
+                tooltip: 'Reset to Defaults',
+                onPressed: () {
+                  refreshUI();
+                  populateTextFieldsWithDefaultValues();
+                },
+              ),
+            ),
+          ],
+        ),
+        body: ListView(children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-            child: IconButton(
-              icon: Icon(Icons.restore_outlined),
-              tooltip: 'Reset to Defaults',
-              onPressed: () {
-                refreshUI();
-                populateTextFieldsWithDefaultValues();
-              },
-            ),
-          ),
-        ],
-      ),
-      body: ListView(children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-          child: Card(
-            color: cardColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(cardBorderRadius),
-              side: BorderSide(
-                color: isSelectedButtonBorderOff
-                    ? cardColor
-                    : Colors.grey[cardBorderColor]
-                        .withOpacity(cardBorderOpacity),
-                width: cardBorderWidth,
-              ),
-            ),
-            elevation: cardElevation,
-            child: InkWell(
-              customBorder: RoundedRectangleBorder(
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+            child: Card(
+              color: cardColor,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(cardBorderRadius),
+                side: BorderSide(
+                  color: isSelectedButtonBorderOff
+                      ? cardColor
+                      : Colors.grey[cardBorderColor]
+                          .withOpacity(cardBorderOpacity),
+                  width: cardBorderWidth,
+                ),
               ),
-              onTap: () {},
-              child: Container(
-                height: 110,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: accentColor,
-                      radius: 22,
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 32,
-                        ),
-                        Text("Ha! Ha! Ha! What A Story Mark!",
-                            style: TextStyle(fontSize: cardTitleFontSize)),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "You're Tearing Me Apart, Lisa!",
-                          style: TextStyle(
-                              fontSize: cardSubtitleFontSize,
-                              color: Theme.of(context).hintColor),
-                        ),
-                      ],
-                    ),
-                  ],
+              elevation: cardElevation,
+              child: InkWell(
+                customBorder: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(cardBorderRadius),
+                ),
+                onTap: () {},
+                child: Container(
+                  height: 110,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: accentColor,
+                        radius: 22,
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 32,
+                          ),
+                          Text("Ha! Ha! Ha! What A Story Mark!",
+                              style: TextStyle(fontSize: cardTitleFontSize)),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "You're Tearing Me Apart, Lisa!",
+                            style: TextStyle(
+                                fontSize: cardSubtitleFontSize,
+                                color: Theme.of(context).hintColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
-          child: Row(
-            children: [
-              const Text(
-                "Card Options",
-                style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
-              ),
-              Expanded(
-                child: Divider(
-                  indent: 15,
-                  thickness: 2,
-                  height: 1,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: Row(children: [
-            Expanded(
-                child: Text(
-              "Background\nDef: 2A2A2A",
-              style:
-                  TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
-            )),
-            const SizedBox(
-              width: 20,
-            ),
-            Flexible(
-              child: txtFieldFuncString(
-                  customControllerCardColor, changeCardColor),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Expanded(
-                child: Text(
-              "Elevation\nDef: 1.0",
-              style:
-                  TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
-            )),
-            const SizedBox(
-              width: 20,
-            ),
-            Flexible(
-              child: txtFieldFuncDouble(
-                  customControllerCardElevation, changeCardElevation),
-            ),
-          ]),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: Row(children: [
-            Expanded(
-                child: Text(
-              "Border Width   \nDef: 1.0",
-              style:
-                  TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
-            )),
-            const SizedBox(
-              width: 20,
-            ),
-            Flexible(
-              child: txtFieldFuncDouble(
-                  customControllerCardBorderWidth, changeCardBorderWidth),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Expanded(
-                child: Text(
-              "Border Rad.\nDef: 20.0",
-              style:
-                  TextStyle(fontSize: 12.5, color: Theme.of(context).hintColor),
-            )),
-            const SizedBox(
-              width: 20,
-            ),
-            Flexible(
-              child: txtFieldFuncDouble(
-                  customControllerCardBorderRadius, changeCardBorderRadius),
-            ),
-          ]),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: Row(
-            children: [
-              Expanded(
-                  child: Text(
-                "Border Opac.\nDef: 1.0\n<= 1",
-                style: TextStyle(
-                    fontSize: 12.5, color: Theme.of(context).hintColor),
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Flexible(
-                child: txtFieldFuncDouble(
-                    customControllerCardBorderOpacity, changeCardBorderOpacity),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                  child: Text(
-                "Font Size\nDef: Title 16\nSub 14",
-                style: TextStyle(
-                    fontSize: 12.5, color: Theme.of(context).hintColor),
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Flexible(
-                child: txtFieldFuncDouble(
-                    customControllerFontSize, changeFontSize),
-              ),
-            ],
-          ),
-        ),
-
-        const SizedBox(
-          height: 15,
-        ),
-        //Border COLOR BUTTONS
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 8, 0),
-          child: Container(
-            height: 80.0,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    Container(
-                        child: Row(
-                      children: [
-                        Text(
-                          "Border Color\nDef: Grey[700]",
-                          style: TextStyle(
-                              fontSize: 12.5,
-                              color: Theme.of(context).hintColor),
-                        )
-                      ],
-                    )),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            MaterialButton(
-                              minWidth: 20,
-                              height: 35,
-                              child: isSelectedButtonBorderOff
-                                  ? Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    )
-                                  : SizedBox.shrink(),
-                              shape: CircleBorder(
-                                  side: BorderSide(
-                                      width: 2,
-                                      color: Colors.white.withOpacity(0.3),
-                                      style: BorderStyle.solid)),
-                              elevation: 2,
-                              onPressed: () {
-                                setState(() {
-                                  isSelectedButtonBorderOff = true;
-                                  isSelectedGrey600 = false;
-                                  isSelectedGrey700 = false;
-                                  isSelectedGrey800 = false;
-                                  isSelectedGrey850 = false;
-                                });
-                                changeBorderColor(700);
-                              },
-                            ),
-                            Text(
-                              "Border\nOff",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 12.5,
-                                  color: Theme.of(context).hintColor),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            MaterialButton(
-                              minWidth: 20,
-                              height: 35,
-                              child: isSelectedGrey600
-                                  ? Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    )
-                                  : SizedBox.shrink(),
-                              shape: CircleBorder(
-                                  side: BorderSide(
-                                      width: 2,
-                                      color: Colors.white.withOpacity(0.3),
-                                      style: BorderStyle.solid)),
-                              elevation: 2,
-                              color: Colors.grey[600],
-                              onPressed: () {
-                                setState(() {
-                                  isSelectedGrey600 = true;
-                                  isSelectedGrey700 = false;
-                                  isSelectedGrey800 = false;
-                                  isSelectedGrey850 = false;
-                                  isSelectedButtonBorderOff = false;
-                                });
-                                changeBorderColor(600);
-                              },
-                            ),
-                            Text(
-                              "[ 600 ]\n757575",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 12.5,
-                                  color: Theme.of(context).hintColor),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            MaterialButton(
-                              minWidth: 20,
-                              height: 35,
-                              child: isSelectedGrey700
-                                  ? Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    )
-                                  : SizedBox.shrink(),
-                              shape: CircleBorder(
-                                  side: BorderSide(
-                                      width: 2,
-                                      color: Colors.white.withOpacity(0.3),
-                                      style: BorderStyle.solid)),
-                              elevation: 2,
-                              color: Colors.grey[700],
-                              onPressed: () {
-                                setState(() {
-                                  isSelectedGrey600 = false;
-                                  isSelectedGrey700 = true;
-                                  isSelectedGrey800 = false;
-                                  isSelectedGrey850 = false;
-                                  isSelectedButtonBorderOff = false;
-                                });
-                                changeBorderColor(700);
-                              },
-                            ),
-                            Text(
-                              "[ 700 ]\n616161",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 12.5,
-                                  color: Theme.of(context).hintColor),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            MaterialButton(
-                              minWidth: 20,
-                              height: 35,
-                              child: isSelectedGrey800
-                                  ? Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    )
-                                  : SizedBox.shrink(),
-                              shape: CircleBorder(
-                                  side: BorderSide(
-                                      width: 2,
-                                      color: Colors.white.withOpacity(0.3),
-                                      style: BorderStyle.solid)),
-                              elevation: 2,
-                              color: Colors.grey[800],
-                              onPressed: () {
-                                setState(() {
-                                  isSelectedGrey600 = false;
-                                  isSelectedGrey700 = false;
-                                  isSelectedGrey800 = true;
-                                  isSelectedGrey850 = false;
-                                  isSelectedButtonBorderOff = false;
-                                });
-                                changeBorderColor(800);
-                              },
-                            ),
-                            Text(
-                              "[ 800 ]\n424242",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 12.5,
-                                  color: Theme.of(context).hintColor),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            MaterialButton(
-                              minWidth: 20,
-                              height: 35,
-                              child: isSelectedGrey850
-                                  ? Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    )
-                                  : SizedBox.shrink(),
-                              shape: CircleBorder(
-                                  side: BorderSide(
-                                      width: 2,
-                                      color: Colors.white.withOpacity(0.3),
-                                      style: BorderStyle.solid)),
-                              elevation: 2,
-                              color: Colors.grey[850],
-                              onPressed: () {
-                                setState(() {
-                                  isSelectedGrey600 = false;
-                                  isSelectedGrey700 = false;
-                                  isSelectedGrey800 = false;
-                                  isSelectedGrey850 = true;
-                                  isSelectedButtonBorderOff = false;
-                                });
-                                changeBorderColor(850);
-                              },
-                            ),
-                            Center(
-                              child: Text(
-                                "[ 850 ]\n303030",
+                const Text(
+                  "Card Options",
+                  style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+                ),
+                Expanded(
+                  child: Divider(
+                    indent: 15,
+                    thickness: 2,
+                    height: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(children: [
+              Expanded(
+                  child: Text(
+                "Background\nDef: 2A2A2A",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: txtFieldFuncString(
+                    customControllerCardColor, changeCardColor),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                  child: Text(
+                "Elevation\nDef: 1.0",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: txtFieldFuncDouble(
+                    customControllerCardElevation, changeCardElevation),
+              ),
+            ]),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(children: [
+              Expanded(
+                  child: Text(
+                "Border Width   \nDef: 1.0",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: txtFieldFuncDouble(
+                    customControllerCardBorderWidth, changeCardBorderWidth),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                  child: Text(
+                "Border Rad.\nDef: 20.0",
+                style: TextStyle(
+                    fontSize: 12.5, color: Theme.of(context).hintColor),
+              )),
+              const SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: txtFieldFuncDouble(
+                    customControllerCardBorderRadius, changeCardBorderRadius),
+              ),
+            ]),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  "Border Opac.\nDef: 1.0\n<= 1",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: txtFieldFuncDouble(customControllerCardBorderOpacity,
+                      changeCardBorderOpacity),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                    child: Text(
+                  "Font Size\nDef: Title 16\nSub 14",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: txtFieldFuncDouble(
+                      customControllerFontSize, changeFontSize),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(
+            height: 15,
+          ),
+          //Border COLOR BUTTONS
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 8, 0),
+            child: Container(
+              height: 80.0,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                          child: Row(
+                        children: [
+                          Text(
+                            "Border Color\nDef: Grey[700]",
+                            style: TextStyle(
+                                fontSize: 12.5,
+                                color: Theme.of(context).hintColor),
+                          )
+                        ],
+                      )),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              MaterialButton(
+                                minWidth: 20,
+                                height: 35,
+                                child: isSelectedButtonBorderOff
+                                    ? Icon(
+                                        Icons.check,
+                                        color: Colors.white,
+                                      )
+                                    : SizedBox.shrink(),
+                                shape: CircleBorder(
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: Colors.white.withOpacity(0.3),
+                                        style: BorderStyle.solid)),
+                                elevation: 2,
+                                onPressed: () {
+                                  setState(() {
+                                    isSelectedButtonBorderOff = true;
+                                    isSelectedGrey600 = false;
+                                    isSelectedGrey700 = false;
+                                    isSelectedGrey800 = false;
+                                    isSelectedGrey850 = false;
+                                  });
+                                  changeBorderColor(700);
+                                },
+                              ),
+                              Text(
+                                "Border\nOff",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 12.5,
                                     color: Theme.of(context).hintColor),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            children: [
+                              MaterialButton(
+                                minWidth: 20,
+                                height: 35,
+                                child: isSelectedGrey600
+                                    ? Icon(
+                                        Icons.check,
+                                        color: Colors.white,
+                                      )
+                                    : SizedBox.shrink(),
+                                shape: CircleBorder(
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: Colors.white.withOpacity(0.3),
+                                        style: BorderStyle.solid)),
+                                elevation: 2,
+                                color: Colors.grey[600],
+                                onPressed: () {
+                                  setState(() {
+                                    isSelectedGrey600 = true;
+                                    isSelectedGrey700 = false;
+                                    isSelectedGrey800 = false;
+                                    isSelectedGrey850 = false;
+                                    isSelectedButtonBorderOff = false;
+                                  });
+                                  changeBorderColor(600);
+                                },
+                              ),
+                              Text(
+                                "[ 600 ]\n757575",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 12.5,
+                                    color: Theme.of(context).hintColor),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            children: [
+                              MaterialButton(
+                                minWidth: 20,
+                                height: 35,
+                                child: isSelectedGrey700
+                                    ? Icon(
+                                        Icons.check,
+                                        color: Colors.white,
+                                      )
+                                    : SizedBox.shrink(),
+                                shape: CircleBorder(
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: Colors.white.withOpacity(0.3),
+                                        style: BorderStyle.solid)),
+                                elevation: 2,
+                                color: Colors.grey[700],
+                                onPressed: () {
+                                  setState(() {
+                                    isSelectedGrey600 = false;
+                                    isSelectedGrey700 = true;
+                                    isSelectedGrey800 = false;
+                                    isSelectedGrey850 = false;
+                                    isSelectedButtonBorderOff = false;
+                                  });
+                                  changeBorderColor(700);
+                                },
+                              ),
+                              Text(
+                                "[ 700 ]\n616161",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 12.5,
+                                    color: Theme.of(context).hintColor),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            children: [
+                              MaterialButton(
+                                minWidth: 20,
+                                height: 35,
+                                child: isSelectedGrey800
+                                    ? Icon(
+                                        Icons.check,
+                                        color: Colors.white,
+                                      )
+                                    : SizedBox.shrink(),
+                                shape: CircleBorder(
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: Colors.white.withOpacity(0.3),
+                                        style: BorderStyle.solid)),
+                                elevation: 2,
+                                color: Colors.grey[800],
+                                onPressed: () {
+                                  setState(() {
+                                    isSelectedGrey600 = false;
+                                    isSelectedGrey700 = false;
+                                    isSelectedGrey800 = true;
+                                    isSelectedGrey850 = false;
+                                    isSelectedButtonBorderOff = false;
+                                  });
+                                  changeBorderColor(800);
+                                },
+                              ),
+                              Text(
+                                "[ 800 ]\n424242",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 12.5,
+                                    color: Theme.of(context).hintColor),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            children: [
+                              MaterialButton(
+                                minWidth: 20,
+                                height: 35,
+                                child: isSelectedGrey850
+                                    ? Icon(
+                                        Icons.check,
+                                        color: Colors.white,
+                                      )
+                                    : SizedBox.shrink(),
+                                shape: CircleBorder(
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: Colors.white.withOpacity(0.3),
+                                        style: BorderStyle.solid)),
+                                elevation: 2,
+                                color: Colors.grey[850],
+                                onPressed: () {
+                                  setState(() {
+                                    isSelectedGrey600 = false;
+                                    isSelectedGrey700 = false;
+                                    isSelectedGrey800 = false;
+                                    isSelectedGrey850 = true;
+                                    isSelectedButtonBorderOff = false;
+                                  });
+                                  changeBorderColor(850);
+                                },
+                              ),
+                              Center(
+                                child: Text(
+                                  "[ 850 ]\n303030",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 12.5,
+                                      color: Theme.of(context).hintColor),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+            child: Row(
+              children: [
+                const Text(
+                  "App Color Options",
+                  style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+                ),
+                Expanded(
+                  child: Divider(
+                    indent: 15,
+                    thickness: 2,
+                    height: 1,
+                  ),
                 ),
               ],
             ),
           ),
-        ),
 
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
-          child: Row(
-            children: [
-              const Text(
-                "App Color Options",
-                style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
-              ),
-              Expanded(
-                child: Divider(
-                  indent: 15,
-                  thickness: 2,
-                  height: 1,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  "Background\nDef: 202020",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
+                const SizedBox(
+                  width: 20,
                 ),
-              ),
-            ],
+                Flexible(
+                  child: txtFieldFuncString(customControllerAppBackgroundColor,
+                      changeBackgroundColor),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                    child: Text(
+                  "TopBar\nDef: 202020",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
+                const SizedBox(
+                  width: 20,
+                ),
+                Flexible(
+                  child: txtFieldFuncString(
+                      customControllerAppTopBarColor, changeAppTopBarColor),
+                ),
+              ],
+            ),
           ),
-        ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: Text(
+                  "BottomBar\nDef: 171717",
+                  style: TextStyle(
+                      fontSize: 12.5, color: Theme.of(context).hintColor),
+                )),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: txtFieldFuncString(customControllerAppBottomBarColor,
+                      changeAppBottomBarColor),
+                ),
+                const SizedBox(width: 20),
 
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: Row(
-            children: [
-              Expanded(
-                  child: Text(
-                "Background\nDef: 202020",
-                style: TextStyle(
-                    fontSize: 12.5, color: Theme.of(context).hintColor),
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Flexible(
-                child: txtFieldFuncString(
-                    customControllerAppBackgroundColor, changeBackgroundColor),
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                  child: Text(
-                "TopBar\nDef: 202020",
-                style: TextStyle(
-                    fontSize: 12.5, color: Theme.of(context).hintColor),
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Flexible(
-                child: txtFieldFuncString(
-                    customControllerAppTopBarColor, changeAppTopBarColor),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: Row(
-            children: [
-              Expanded(
-                  child: Text(
-                "BottomBar\nDef: 171717",
-                style: TextStyle(
-                    fontSize: 12.5, color: Theme.of(context).hintColor),
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Flexible(
-                child: txtFieldFuncString(
-                    customControllerAppBottomBarColor, changeAppBottomBarColor),
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                  child: Text(
-                "Accent \nDef: 00BFA5",
-                style: TextStyle(
-                    fontSize: 12.5, color: Theme.of(context).hintColor),
-              )),
-              const SizedBox(
-                width: 22,
-              ),
-              Container(
-                width: 85,
-                height: 45,
-                child: TextButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      primary: backgroundColor,
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.grey[700].withOpacity(0.5),
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
+                // ONLY FOR ACCENT COLOR
+                Container(
+                  width: 180,
+                  height: 48,
+                  child: TextButton(
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -757,7 +756,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             content: SingleChildScrollView(
                               child: ColorPicker(
                                 pickerColor: accentColor,
-                                onColorChanged: changeColor,
+                                onColorChanged: changeColorPicker,
                                 colorPickerWidth: 300.0,
                                 pickerAreaHeightPercent: 1.0,
                                 enableAlpha: false,
@@ -774,104 +773,158 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         },
                       );
                     },
-                    child: Text(
-                      accentColor.toString().substring(10, 16).toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 17,
-                        color: accentColor,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Accent\nDef: 20BFA5  ",
+                          style: TextStyle(
+                              fontSize: 12.5,
+                              color: Theme.of(context).hintColor,
+                              fontWeight: FontWeight.normal),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            maxLength: 6,
+                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                            controller: customControllerAccentColor,
+                            onSubmitted: (String s) =>
+                                changeAccentColor(s.toString()),
+                            decoration: InputDecoration(
+                                counterText: "",
+                                contentPadding: new EdgeInsets.symmetric(
+                                    vertical: 5.0, horizontal: 5.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0))),
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    style: TextButton.styleFrom(
+                      primary: accentColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: accentColor,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                    )),
-              )
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        )
-      ]),
-
-      //BOTTOMBAR
-      bottomNavigationBar: BottomAppBar(
-          color: bottomBarColor,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    splashRadius: 30,
-                    icon: Icon(
-                      Icons.format_list_bulleted_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .color
-                          .withOpacity(0.7),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => ListViewPage(
-                              top: appTopBarColor,
-                              back: backgroundColor,
-                              bottomBar: bottomBarColor,
-                              titleFontSize: cardTitleFontSize,
-                              subtitleFontSize: cardSubtitleFontSize,
-                              populateWithDefaultsValues:
-                                  populateTextFieldsWithDefaultValues,
-                              refreshUI: refreshUI,
-                            ),
-                          ));
-                    }),
-                IconButton(
-                    splashRadius: 30,
-                    icon: Icon(
-                      Icons.home_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .color
-                          .withOpacity(0.7),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => FakeHome(
-                              top: appTopBarColor,
-                              back: backgroundColor,
-                              bottomBar: bottomBarColor,
-                              titleFontSize: cardTitleFontSize,
-                              subtitleFontSize: cardSubtitleFontSize,
-                              accentColor: accentColor,
-                              populateWithDefaultsValues:
-                                  populateTextFieldsWithDefaultValues,
-                              refreshUI: refreshUI,
-                            ),
-                          ));
-                    }),
-                IconButton(
-                    splashRadius: 30,
-                    icon: Icon(
-                      Icons.settings_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .color
-                          .withOpacity(0.7),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => Settings(),
-                            fullscreenDialog: true,
-                          ));
-                    }),
+                  ),
+                ),
               ],
             ),
-          )),
+          ),
+          const SizedBox(
+            height: 20,
+          )
+        ]),
+
+        //BOTTOMBAR
+        bottomNavigationBar: BottomAppBar(
+            color: bottomBarColor,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      splashRadius: 30,
+                      icon: Icon(
+                        Icons.format_list_bulleted_outlined,
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .color
+                            .withOpacity(0.7),
+                      ),
+                      onPressed: () {
+                        loseFocus();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => ListViewPage(
+                                top: appTopBarColor,
+                                back: backgroundColor,
+                                bottomBar: bottomBarColor,
+                                titleFontSize: cardTitleFontSize,
+                                subtitleFontSize: cardSubtitleFontSize,
+                                populateWithDefaultsValues:
+                                    populateTextFieldsWithDefaultValues,
+                                refreshUI: refreshUI,
+                              ),
+                            ));
+                      }),
+                  IconButton(
+                      splashRadius: 30,
+                      icon: Icon(
+                        Icons.home_outlined,
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .color
+                            .withOpacity(0.7),
+                      ),
+                      onPressed: () {
+                        loseFocus();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => FakeHome(
+                                top: appTopBarColor,
+                                back: backgroundColor,
+                                bottomBar: bottomBarColor,
+                                titleFontSize: cardTitleFontSize,
+                                subtitleFontSize: cardSubtitleFontSize,
+                                accentColor: accentColor,
+                                populateWithDefaultsValues:
+                                    populateTextFieldsWithDefaultValues,
+                                refreshUI: refreshUI,
+                              ),
+                            ));
+                      }),
+                  IconButton(
+                      splashRadius: 30,
+                      icon: Icon(
+                        Icons.settings_outlined,
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .color
+                            .withOpacity(0.7),
+                      ),
+                      onPressed: () {
+                        loseFocus();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => Settings(),
+                              fullscreenDialog: true,
+                            ));
+                      }),
+                ],
+              ),
+            )),
+      ),
     );
   }
 
