@@ -19,7 +19,7 @@ class _SettingsState extends State<Settings> {
     super.initState();
   }
 
-  Color themeColorApp = Colors.tealAccent[700];
+  Color themeColorApp = Color(0xFF449EBC);
 
   @override
   Widget build(BuildContext context) {

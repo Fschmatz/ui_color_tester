@@ -78,7 +78,7 @@ class _ListViewPageState extends State<ListViewPage> {
                   : SizedBox(height: 15),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 20,
+              itemCount: 15,
               itemBuilder: (context, index) {
                 if (index % 2 == 0) {
                   return ListTile(

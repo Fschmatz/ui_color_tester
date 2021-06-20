@@ -3,7 +3,7 @@ import 'package:ui_color_tester/util/nameChangelog.dart';
 
 class Changelog extends StatelessWidget {
 
-  Color themeColorApp =  Colors.tealAccent[700];
+  Color themeColorApp =  Color(0xFF449EBC);
 
   @override
   Widget build(BuildContext context) {

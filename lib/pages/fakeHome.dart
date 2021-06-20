@@ -50,7 +50,7 @@ class _FakeHomeState extends State<FakeHome> {
                   widget.top = Color(0xFF202020);
                   widget.back = Color(0xFF202020);
                   widget.bottomBar = Color(0xFF171717);
-                  widget.accentColor = Color(0xFF20BFA5);
+                  widget.accentColor = Color(0xFF449EBC);
                   widget.titleFontSize = 16;
                   widget.subtitleFontSize = 14;
                 });

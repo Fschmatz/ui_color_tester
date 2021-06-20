@@ -28,7 +28,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Color backgroundColor;
   Color appTopBarColor;
   Color bottomBarColor;
-  Color accentColor = Colors.tealAccent[700];
+  Color accentColor = Color(0xFF449EBC);
 
   void changeColorPicker(Color color) => setState(() => {
         accentColor = color,
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       });
     } catch (exception) {
       Fluttertoast.showToast(
-        msg: "Invalid Value",
+        msg: "Invalid Color Value",
       );
     }
   }
@@ -55,7 +55,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       });
     } catch (exception) {
       Fluttertoast.showToast(
-        msg: "Invalid Value",
+        msg: "Invalid Color Value",
       );
     }
   }
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       });
     } catch (exception) {
       Fluttertoast.showToast(
-        msg: "Invalid Value",
+        msg: "Invalid Color Value",
       );
     }
   }
@@ -79,7 +79,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       });
     } catch (exception) {
       Fluttertoast.showToast(
-        msg: "Invalid Value",
+        msg: "Invalid Color Value",
       );
     }
   }
@@ -117,7 +117,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       });
     } catch (exception) {
       Fluttertoast.showToast(
-        msg: "Invalid Value",
+        msg: "Invalid Color Value",
       );
     }
   }
@@ -179,7 +179,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     customControllerAppBackgroundColor.text = '202020';
     customControllerAppTopBarColor.text = '202020';
     customControllerAppBottomBarColor.text = '171717';
-    customControllerAccentColor.text = '20BFA5';
+    customControllerAccentColor.text = '449EBC';
     isSelectedGrey600 = false;
     isSelectedGrey700 = true;
     isSelectedGrey800 = false;
@@ -197,7 +197,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     changeFontSize(16.0);
     changeBorderColor(700);
 
-    changeAccentColor('20BFA5');
+    changeAccentColor('449EBC');
     changeBackgroundColor('202020');
     changeAppTopBarColor('202020');
     changeAppBottomBarColor('171717');
@@ -777,19 +777,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Accent\nDef: 20BFA5  ",
+                          "Accent\nDef: 449EBC",
                           style: TextStyle(
                               fontSize: 12.5,
                               color: Theme.of(context).hintColor,
                               fontWeight: FontWeight.normal),
                         ),
-                        const SizedBox(width: 20),
+                        const SizedBox(width: 15),
                         Expanded(
                           child: TextField(
                             textAlign: TextAlign.center,
                             maxLength: 6,
                             maxLengthEnforcement: MaxLengthEnforcement.enforced,
                             controller: customControllerAccentColor,
+                            textCapitalization: TextCapitalization.characters,
                             onSubmitted: (String s) =>
                                 changeAccentColor(s.toString()),
                             decoration: InputDecoration(
@@ -934,6 +935,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       textAlign: TextAlign.center,
       maxLength: 6,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
+      textCapitalization: TextCapitalization.characters,
       controller: controller,
       onSubmitted: (String s) => onSubmitFunc(s.toString()),
       decoration: InputDecoration(

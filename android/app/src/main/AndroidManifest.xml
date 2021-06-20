@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fschmtz.ui_color_tester">
    <application
-        android:label="UI+Color Tester Fschmtz"
+        android:label="UI + Color Tester Fschmtz"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
