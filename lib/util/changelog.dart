@@ -1,12 +1,11 @@
-class NameChangelog{
+class Changelog{
 
-  static String appVersion = "1.7.2";
+  static String appVersion = "2.0.0";
   static String appName = "UI + Color Tester Fschmtz";
 
   static String changelogCurrent = '''  
-1.7.2
+2.0.0
 - Added Color Picker
-- Changes in the Focus of the Text Fields
 - New Icon
 - Small Fixes
 ''';
@@ -14,6 +13,7 @@ class NameChangelog{
   static String changelogsOld = '''
 1.6.0
 - Added a Fake Home Page with an Action Button
+- Changes in the Focus of the Text Fields
 
 1.5.1
 - Changed Some of the Default Values

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ui_color_tester/util/nameChangelog.dart';
+import 'package:ui_color_tester/util/changelog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AppInfo extends StatelessWidget {
+class AppInfoPage extends StatelessWidget {
 
   _launchGithub()  {
     const url = 'https://github.com/Fschmatz/ui_color_tester';
@@ -30,7 +30,7 @@ class AppInfo extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Center(
-            child: Text(NameChangelog.appName +" "+ NameChangelog.appVersion,
+            child: Text(Changelog.appName +" "+ Changelog.appVersion,
                 style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,

@@ -105,6 +105,7 @@ class _ListViewPageState extends State<ListViewPage> {
                 if (index % 3 == 0) {
                   return ListTile(
                     onTap: () {},
+                    leading: Icon(Icons.text_snippet_outlined),
                     title: Text(
                         "Mark: How was work today?\n"
                         "Johnny: Oh, pretty good. We got a new client and the bank will make a lot of money.\n"
@@ -119,6 +120,7 @@ class _ListViewPageState extends State<ListViewPage> {
                 } else {
                   return ListTile(
                     onTap: () {},
+                    leading: Icon(Icons.person_outline_outlined),
                     title: Text(
                         "Johnny: I kill you, you bastard!\n"
                         "Mark: You couldn't kill me if you tried.\n"

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ui_color_tester/util/nameChangelog.dart';
+import 'package:ui_color_tester/util/changelog.dart';
 
-class Changelog extends StatelessWidget {
+class ChangelogPage extends StatelessWidget {
 
   Color themeColorApp =  Color(0xFF449EBC);
 
@@ -27,7 +27,7 @@ class Changelog extends StatelessWidget {
               Icons.article_outlined,
             ),
             title: Text(
-              NameChangelog.changelogCurrent,
+              Changelog.changelogCurrent,
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -47,7 +47,7 @@ class Changelog extends StatelessWidget {
               Icons.article_outlined,
             ),
             title: Text(
-              NameChangelog.changelogsOld,
+              Changelog.changelogsOld,
               style: TextStyle(fontSize: 16),
             ),
           ),

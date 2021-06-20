@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:ui_color_tester/pages/fakeHome.dart';
 import 'package:ui_color_tester/pages/listViewPage.dart';
-import 'configs/settings.dart';
+import 'configs/settingsPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Home extends StatefulWidget {
@@ -918,7 +918,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         Navigator.push(
                             context,
                             MaterialPageRoute<void>(
-                              builder: (BuildContext context) => Settings(),
+                              builder: (BuildContext context) => SettingsPage(),
                               fullscreenDialog: true,
                             ));
                       }),
