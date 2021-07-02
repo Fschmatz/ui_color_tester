@@ -181,10 +181,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     customControllerAppBottomBarColor.text = '171717';
     customControllerAccentColor.text = '449EBC';
     isSelectedGrey600 = false;
-    isSelectedGrey700 = true;
+    isSelectedGrey700 = false;
     isSelectedGrey800 = false;
     isSelectedGrey850 = false;
-    isSelectedButtonBorderOff = false;
+    isSelectedButtonBorderOff = true;
   }
 
   void refreshUI() {
@@ -869,6 +869,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 bottomBar: bottomBarColor,
                                 titleFontSize: cardTitleFontSize,
                                 subtitleFontSize: cardSubtitleFontSize,
+                                accentColor: accentColor,
+                                cardColor : cardColor,
                                 populateWithDefaultsValues:
                                     populateTextFieldsWithDefaultValues,
                                 refreshUI: refreshUI,
@@ -944,18 +946,22 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               new EdgeInsets.symmetric(vertical: 0.0, horizontal: 5.0),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
+              width: 1.5,
               color: accentColor,
             ),
             borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: OutlineInputBorder(
+
               borderSide: BorderSide(
-                color: Colors.grey[700].withOpacity(0.5),
+                width: 1.5,
+                color: Colors.grey[800],
               ),
               borderRadius: BorderRadius.circular(10.0)),
           border: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.grey[700].withOpacity(0.5),
+                width: 1.5,
+                color: Colors.grey[800],
               ),
               borderRadius: BorderRadius.circular(10.0))),
       style: TextStyle(
@@ -983,18 +989,21 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               new EdgeInsets.symmetric(vertical: 0.0, horizontal: 5.0),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
+              width: 1.5,
               color: accentColor,
             ),
             borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.grey[700].withOpacity(0.5),
+                width: 1.5,
+                color: Colors.grey[800],
               ),
               borderRadius: BorderRadius.circular(10.0)),
           border: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.grey[700].withOpacity(0.5),
+                width: 1.5,
+                color: Colors.grey[800],
               ),
               borderRadius: BorderRadius.circular(10.0))),
       style: TextStyle(

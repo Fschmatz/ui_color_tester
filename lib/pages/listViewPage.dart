@@ -4,6 +4,8 @@ class ListViewPage extends StatefulWidget {
   Color back;
   Color top;
   Color bottomBar;
+  Color accentColor;
+  Color cardColor;
   double titleFontSize;
   double subtitleFontSize;
   Function() populateWithDefaultsValues;
@@ -17,6 +19,8 @@ class ListViewPage extends StatefulWidget {
       this.populateWithDefaultsValues,
       this.refreshUI,
       this.titleFontSize,
+      this.cardColor,
+      this.accentColor,
       this.subtitleFontSize})
       : super(key: key);
 
@@ -62,6 +66,8 @@ class _ListViewPageState extends State<ListViewPage> {
                   widget.bottomBar = Color(0xFF171717);
                   widget.titleFontSize = 16;
                   widget.subtitleFontSize = 14;
+                  widget.accentColor = Color(0xFF449EBC);
+                  widget.cardColor = Color(0xFF2A2A2A);
                 });
               },
             ),
@@ -78,7 +84,7 @@ class _ListViewPageState extends State<ListViewPage> {
                   : SizedBox(height: 15),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 15,
+              itemCount: 12,
               itemBuilder: (context, index) {
                 if (index % 2 == 0) {
                   return ListTile(
@@ -95,10 +101,25 @@ class _ListViewPageState extends State<ListViewPage> {
                             "Roof Scene",
                             style: TextStyle(fontSize: widget.subtitleFontSize),
                           ),
-                          IconButton(
-                              color: Theme.of(context).hintColor,
-                              icon: Icon(Icons.share_outlined),
-                              onPressed: () {}),
+                          Container(
+                            width: 50,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Icon(
+                                Icons.share_outlined,
+                                size: 21,
+                                color: Theme.of(context).hintColor,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                primary: widget.cardColor,
+                                onPrimary: widget.accentColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ));
                 }
@@ -137,15 +158,31 @@ class _ListViewPageState extends State<ListViewPage> {
                               fontSize: widget.subtitleFontSize,
                               color: Theme.of(context).hintColor),
                         ),
-                        IconButton(
-                            color: Theme.of(context).hintColor,
-                            icon: Icon(Icons.share_outlined),
-                            onPressed: () {}),
+                        Container(
+                          width: 50,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Icon(
+                              Icons.share_outlined,
+                              size: 21,
+                              color: Theme.of(context).hintColor,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              primary: widget.cardColor,
+                              onPrimary: widget.accentColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   );
                 }
-              })
+              }),
+          const SizedBox(height: 30,),
         ],
       ),
       bottomNavigationBar: BottomAppBar(

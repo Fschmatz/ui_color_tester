@@ -1,13 +1,14 @@
 class Changelog{
 
-  static String appVersion = "2.0.0";
+  static String appVersion = "2.0.1";
   static String appName = "UI + Color Tester Fschmtz";
 
   static String changelogCurrent = '''  
-2.0.0
+2.0.1
 - Added Color Picker
 - New Icon
 - Small Fixes
+- Changed Some of the Default Values
 ''';
 
   static String changelogsOld = '''
