@@ -140,7 +140,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             "Show Border Width and Opacity Options",
                             style: TextStyle(fontSize: 16),
                           ),
-                          secondary: Icon(Icons.format_list_numbered_rtl),
+                          secondary: Icon(Icons.tune_outlined),
                           activeColor: Colors.blue,
                           value: snapshot.data,
                           onChanged: (value) {
@@ -175,7 +175,7 @@ class ShowBorderWidthOpacity {
 
   _loadFromPrefs() async {
     await _initPrefs();
-    return prefs.getBool(key) ?? true;
+    return prefs.getBool(key) ?? false;
   }
 
   _saveToPrefs() async {

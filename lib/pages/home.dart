@@ -256,7 +256,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         ),
         body: ListView(children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+            padding: EdgeInsets.fromLTRB(16, _showBorderWidthOpacity ? 10 : 20, 16, _showBorderWidthOpacity ? 10 : 20),
             child: Card(
               color: cardColor,
               shape: RoundedRectangleBorder(
@@ -309,7 +309,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+            padding: EdgeInsets.fromLTRB(15, 20, 15, _showBorderWidthOpacity ? 20 : 25),
             child: Row(
               children: [
                 const Text(
@@ -360,9 +360,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ),
             ]),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: _showBorderWidthOpacity ? 20 : 25),
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(children: [
@@ -397,9 +395,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ),
             ]),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: _showBorderWidthOpacity ? 20 : 25),
           Visibility(
             visible: _showBorderWidthOpacity,
             child: Padding(
@@ -686,7 +682,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
 
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+            padding: EdgeInsets.fromLTRB(15,_showBorderWidthOpacity ? 20 : 25, 15, _showBorderWidthOpacity ? 20 : 25),
             child: Row(
               children: [
                 const Text(
@@ -738,7 +734,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: _showBorderWidthOpacity ? 20 : 25),
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(
