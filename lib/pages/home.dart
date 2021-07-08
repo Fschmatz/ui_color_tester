@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui_color_tester/pages/fakeHome.dart';
 import 'package:ui_color_tester/pages/listViewPage.dart';
 import 'configs/settingsPage.dart';
@@ -17,6 +18,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
+
+  bool _showBorderWidthOpacity = false;
+
   //------------- HOME
   TextEditingController customControllerAppBackgroundColor =
       TextEditingController();
@@ -205,8 +209,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    super.initState();
+    _loadFromPrefs();
     populateTextFieldsWithDefaultValues();
+    super.initState();
+  }
+
+  _loadFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _showBorderWidthOpacity =  prefs.getBool('ShowBorderWidthOpacity') ?? false;
+
+    //if(settingChanged){setState(() {});}
   }
 
   void loseFocus() {
@@ -356,10 +368,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             child: Row(children: [
               Expanded(
                   child: Text(
-                "Border Width   \nDef: 1.0",
-                style: TextStyle(
-                    fontSize: 12.5, color: Theme.of(context).hintColor),
-              )),
+                    "Font Size\nDef: Title 16\nSub 14",
+                    style: TextStyle(
+                        fontSize: 12.5, color: Theme.of(context).hintColor),
+                  )),
               const SizedBox(
                 width: 20,
               ),
@@ -388,45 +400,51 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: Row(
-              children: [
-                Expanded(
-                    child: Text(
-                  "Border Opac.\nDef: 1.0\n<= 1",
-                  style: TextStyle(
-                      fontSize: 12.5, color: Theme.of(context).hintColor),
-                )),
-                const SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: txtFieldFuncDouble(customControllerCardBorderOpacity,
-                      changeCardBorderOpacity),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                    child: Text(
-                  "Font Size\nDef: Title 16\nSub 14",
-                  style: TextStyle(
-                      fontSize: 12.5, color: Theme.of(context).hintColor),
-                )),
-                const SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: txtFieldFuncDouble(
-                      customControllerFontSize, changeFontSize),
-                ),
-              ],
+          Visibility(
+            visible: _showBorderWidthOpacity,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                    "Border Opac.\nDef: 1.0\n<= 1",
+                    style: TextStyle(
+                        fontSize: 12.5, color: Theme.of(context).hintColor),
+                  )),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Flexible(
+                    child: txtFieldFuncDouble(customControllerCardBorderOpacity,
+                        changeCardBorderOpacity),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                      child: Text(
+                        "Border Width   \nDef: 1.0",
+                        style: TextStyle(
+                            fontSize: 12.5, color: Theme.of(context).hintColor),
+                      )),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Flexible(
+                    child: txtFieldFuncDouble(
+                        customControllerFontSize, changeFontSize),
+                  ),
+                ],
+              ),
             ),
           ),
 
-          const SizedBox(
-            height: 15,
+          Visibility(
+            visible: _showBorderWidthOpacity,
+            child: const SizedBox(
+              height: 15,
+            ),
           ),
           //Border COLOR BUTTONS
           Padding(
@@ -922,7 +940,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) => SettingsPage(),
                               fullscreenDialog: true,
-                            ));
+                            )).then((value) => _loadFromPrefs());
                       }),
                 ],
               ),

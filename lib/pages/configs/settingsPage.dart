@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui_color_tester/util/changelog.dart';
 import 'package:ui_color_tester/util/theme.dart';
 import 'appInfoPage.dart';
@@ -127,8 +128,59 @@ class _SettingsPageState extends State<SettingsPage> {
                       fontSize: 16, color: Theme.of(context).hintColor),
                 ),
               ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              FutureBuilder(
+                  future: ShowBorderWidthOpacity()._loadFromPrefs(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return SwitchListTile(
+                          title: Text(
+                            "Show Border Width and Opacity Options",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          secondary: Icon(Icons.format_list_numbered_rtl),
+                          activeColor: Colors.blue,
+                          value: snapshot.data,
+                          onChanged: (value) {
+                            setState(() {
+                              ShowBorderWidthOpacity().toggleShowCount(value);
+                            });
+                          });
+                    }
+                    return SizedBox.shrink();
+                  })
           ],
           ),
         ));
   }
 }
+
+class ShowBorderWidthOpacity {
+  final String key = 'ShowBorderWidthOpacity';
+  SharedPreferences prefs;
+  bool _showBorderWidthOpacity;
+
+  _initPrefs() async {
+    if (prefs == null) {
+      prefs = await SharedPreferences.getInstance();
+    }
+  }
+
+  toggleShowCount(bool value) {
+    _showBorderWidthOpacity = value;
+    _saveToPrefs();
+  }
+
+  _loadFromPrefs() async {
+    await _initPrefs();
+    return prefs.getBool(key) ?? true;
+  }
+
+  _saveToPrefs() async {
+    await _initPrefs();
+    prefs.setBool(key, _showBorderWidthOpacity);
+  }
+}
+

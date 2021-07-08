@@ -1,17 +1,21 @@
 class Changelog{
 
-  static String appVersion = "2.0.1";
+  static String appVersion = "2.1.0";
   static String appName = "UI + Color Tester Fschmtz";
 
   static String changelogCurrent = '''  
-2.0.1
+2.1.0
+- Option to Hide Border Opacity and Width
+- Colored Button with Text on the ListView Page
+''';
+
+  static String changelogsOld = '''
+2.0.0
 - Added Color Picker
 - New Icon
 - Small Fixes
 - Changed Some of the Default Values
-''';
 
-  static String changelogsOld = '''
 1.6.0
 - Added a Fake Home Page with an Action Button
 - Changes in the Focus of the Text Fields

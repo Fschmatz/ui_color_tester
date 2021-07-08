@@ -29,6 +29,47 @@ class ListViewPage extends StatefulWidget {
 }
 
 class _ListViewPageState extends State<ListViewPage> {
+
+  Widget shareButtonIcon(){
+    return Container(
+      width: 50,
+      child: TextButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.share_outlined,
+          size: 21,
+          color: Theme.of(context).hintColor,
+        ),
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          primary: widget.cardColor,
+          onPrimary: widget.accentColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget shareButtonText(){
+    return Container(
+      width: 100,
+      child: TextButton(
+        onPressed: () {},
+        child: Text('Share'),
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          primary: widget.accentColor.withOpacity(0.3),
+          onPrimary: widget.accentColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+        ),
+      ),
+    );
+  }
+
   bool showDivider = true;
 
   @override
@@ -101,25 +142,7 @@ class _ListViewPageState extends State<ListViewPage> {
                             "Roof Scene",
                             style: TextStyle(fontSize: widget.subtitleFontSize),
                           ),
-                          Container(
-                            width: 50,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Icon(
-                                Icons.share_outlined,
-                                size: 21,
-                                color: Theme.of(context).hintColor,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                primary: widget.cardColor,
-                                onPrimary: widget.accentColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                ),
-                              ),
-                            ),
-                          ),
+                          shareButtonText(),
                         ],
                       ));
                 }
@@ -158,25 +181,7 @@ class _ListViewPageState extends State<ListViewPage> {
                               fontSize: widget.subtitleFontSize,
                               color: Theme.of(context).hintColor),
                         ),
-                        Container(
-                          width: 50,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Icon(
-                              Icons.share_outlined,
-                              size: 21,
-                              color: Theme.of(context).hintColor,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              primary: widget.cardColor,
-                              onPrimary: widget.accentColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                            ),
-                          ),
-                        ),
+                        shareButtonIcon(),
                       ],
                     ),
                   );
@@ -207,3 +212,4 @@ class _ListViewPageState extends State<ListViewPage> {
     );
   }
 }
+
